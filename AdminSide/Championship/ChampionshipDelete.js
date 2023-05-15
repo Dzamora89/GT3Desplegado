@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -47,13 +47,13 @@ function getCookieValue(cookieName) {
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
@@ -64,7 +64,7 @@ var requestOptions = {
 };
 //Todo: Cambiar los Select al evento de Jquery para Change on Select
 
-fetch("../../backend/api/championship/getallchampionship.php", requestOptions)
+fetch("http://localhost/gt3prostats/backend/api/championship/getallchampionship.php", requestOptions)
     .then(response => response.json())
     .then(data => data.forEach((dato) => {
         let select = document.getElementById('updateSelect')
@@ -80,7 +80,7 @@ $('#updateSelect').change(function () {
         method: 'GET', redirect: 'follow'
     };
 
-    let url = `../../backend/api/championship/getchampionshipByID.php?championshipID=${document.getElementById("updateSelect").value}`
+    let url = `http://localhost/gt3prostats/backend/api/championship/getchampionshipByID.php?championshipID=${document.getElementById("updateSelect").value}`
 
     fetch(url, requestOptions)
         .then(response => response.json())
@@ -138,55 +138,20 @@ $('#updateSelect').change(function () {
 })
 
 function deleteChampionship(championshipID) {
-
-    $.ajax({
-            'url': './../backend/api/championship/Deletechampionship.php',
-            'data': {
-                'championshipID' : championshipID
-            },
-            'type': 'get',
-            'dataType': 'html',
-            'beforeSend':  () => {
-            }
-        })
-            .done( (response) => {
-                console.log(response)
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
-                Championship Deleted
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-                document.getElementById('principal').appendChild(alert)
-            })
-            .fail( function (code, status) {
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
-                Championship NOT DELETED
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-                document.getElementById('principal').appendChild(alert)
-            })
-            .always( function (xhr, status) {
-            });
-    /*   var myHeaders = new Headers();
+    var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
 
         var raw = `{\r\n    \"championshipID\" : \"${championshipID}\"
     \r\n}`;
 
     var requestOptions = {
-        method: 'get',
+        method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
     };
 
-    fetch("../../backend/api/championship/Deletechampionship.php", requestOptions)
+    fetch("http://localhost/gt3prostats/backend/api/championship/Deletechampionship.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result)
@@ -211,6 +176,6 @@ function deleteChampionship(championshipID) {
             `;
 
             document.getElementById('principal').appendChild(alert)
-        });*/
+        });
 
 }

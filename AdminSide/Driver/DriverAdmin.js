@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -46,13 +46,13 @@ function getCookieValue(cookieName) {
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
@@ -66,7 +66,7 @@ function fillTheTable() {
         redirect: 'follow'
     };
 
-    fetch("../../backend/api/driver/getalldriver.php", requestOptions)
+    fetch("http://localhost/gt3prostats/backend/api/driver/getalldriver.php", requestOptions)
         .then(response => response.json())
         .then(data => data.forEach( (dato) => {
             $('#driverTable').append(`<tr>

@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -47,13 +47,13 @@ function getCookieValue(cookieName) {
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
@@ -68,7 +68,7 @@ function getSelect() {
     };
 
 
-    fetch("../../backend/api/driver/getalldriver.php", requestOptions1)
+    fetch("http://localhost/gt3prostats/backend/api/driver/getalldriver.php", requestOptions1)
         .then(response => response.json())
         .then(data => data.sort((a,b) => {
             if (a.driverLastName > b.driverLastName){
@@ -96,7 +96,7 @@ $('#deleteSelect').change(() => {
         redirect: 'follow'
     };
 
-    let url = `../../backend/api/Driver/getDriverByID.php?driverID=${document.getElementById("deleteSelect").value}`
+    let url = `http://localhost/gt3prostats/backend/api/Driver/getDriverByID.php?driverID=${document.getElementById("deleteSelect").value}`
 
     fetch(url, requestOptions)
         .then(response => response.text())
@@ -120,10 +120,6 @@ $('#deleteSelect').change(() => {
         <div class="input-group mb-3 w-50">
             <span class="input-group-text" id="DriverWebsite">Driver Website</span>
             <input readonly id="urlInput" type="url" class="form-control" placeholder="Driver Website" aria-label="DriverWebsite" aria-describedby="Driver-Website" value="${jsonResult.driverWebsite}">
-        </div>
-        <div class="input-group mb-3 w-50">
-            <span class="input-group-text" id="driverImgUrl">Driver Image URL</span>
-            <input readonly id="driverImgUrl" type="url" class="form-control" placeholder="driverImgUrl" aria-label="DriverWebsite" aria-describedby="Driver-Website" value="${jsonResult.driverImgUrl}">
         </div>
         <div class="input-group mb-3 w-50">
             <span class="input-group-text" id="Twitter">Twitter @</span>
@@ -150,62 +146,25 @@ $('#deleteSelect').change(() => {
         })
         .catch(error => console.log('error', error));
 })
-function deleteDriver() {/*
+function deleteDriver() {
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "text/plain");*/
+    myHeaders.append("Content-Type", "text/plain");
 
     //Todo Jquery
     let driverID = document.getElementById("deleteSelect").value
-    $.ajax({
-            'url': '../../backend/api/driver/DeleteDriver.php',
-            'data': {
-                'driverID' : driverID
-            },
-            'type': 'get',
-            'dataType': 'html',
-            'beforeSend':  () => {
-            }
-        })
-            .done( (response) => {
-                console.log(response)
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
-                Driver Deleted
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-                document.getElementById('principal').appendChild(alert)
-            })
-            .fail( function (code, status) {
-                console.log(code)
-                console.log(status)
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
-                Driver NOT DELETED
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
 
-                document.getElementById('principal').appendChild(alert)
-            })
-            .always( function (xhr, status) {
-            });
-
-/*
 
     var raw = `{\r\n    \"driverID\" : \"${driverID}\"
     \r\n}`;
 
     var requestOptions = {
-        method: 'get',
+        method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
     };
 
-    fetch("../../backend/api/driver/DeleteDriver.php", requestOptions)
+    fetch("http://localhost/gt3prostats/backend/api/driver/DeleteDriver.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result)
@@ -231,6 +190,5 @@ function deleteDriver() {/*
 
             document.getElementById('principal').appendChild(alert)
         });
-*/
 
 }

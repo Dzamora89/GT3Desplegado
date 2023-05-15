@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -46,13 +46,13 @@ function getCookieValue(cookieName) {
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
@@ -68,9 +68,8 @@ function createDriver() {
     let status = $('#driverStatusInput').val()
     let initialElo = $('#initialEloInput').val()
     let birthday = $('#birthDayInput').val()
-    let driverImgUrl = $('#driverImgUrl').val()
 
-/*
+
 // TODO NOmbres de los ID y las Variables
     var raw = `{\r\n    \"driverFirstName\" : \"${firstName}\",
     \r\n    \"driverLastName\" : \"${lastName}\",
@@ -88,60 +87,18 @@ function createDriver() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
     var requestOptions = {
-        method: 'get',
+        method: 'POST',
         headers: myHeaders,
-        data: raw,
+        body: raw,
         redirect: 'follow'
     };
-*/
-
-$.ajax({
-        'url': '../../backend/api/driver/CreateDriver.php',
-        'data': {
-            'driverFirstName' : firstName,
-            'driverLastName' : lastName,
-            'driverCountry' : country,
-            'driverDateOfBirth' : birthday,
-            'driverWebsite' : url,
-            'driverTwitter' : twitter,
-            'driverStatus' : status,
-            'driverELO' : initialElo,
-            'driverImgUrl' : driverImgUrl
-        },
-        'type': 'get',
-        'dataType': 'html',
-        'beforeSend':  () => {
-        }
-    })
-        .done( (response) => {
-            console.log(response)
-            let alert = document.createElement("div")
-            alert.innerHTML =
-                `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
-                Driver Created
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-            document.getElementById('principal').appendChild(alert)        })
-        .fail( function (code, status) {
-            console.log('error', status)
-            let alert = document.createElement("div")
-            alert.innerHTML =
-                `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
-                Driver Not Created
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-            document.getElementById('principal').appendChild(alert)
-        })
-        .always( function (xhr, status) {
-        });
 
 
-/*
-    let result = fetch("../../backend/api/driver/CreateDriver.php", requestOptions)
+
+
+
+
+    let result = fetch("http://localhost/gt3prostats/backend/api/driver/CreateDriver.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result)
@@ -167,5 +124,5 @@ $.ajax({
 
             document.getElementById('principal').appendChild(alert)
         });
-*/
+
 }

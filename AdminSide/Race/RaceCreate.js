@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -47,13 +47,13 @@ $( document ).ready(getSelect() )
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
@@ -67,7 +67,7 @@ function getSelect() {
     };
 
 
-    fetch("../../backend/api/championship/getallchampionship.php", requestOptions1)
+    fetch("http://localhost/gt3prostats/backend/api/championship/getallchampionship.php", requestOptions1)
         .then(response => response.json())
         .then(data => data.forEach((dato) => {
             let select = document.getElementById('championshipSelect')
@@ -88,50 +88,6 @@ function createRace(){
     let country = $('#country').val()
     let championshipID = $('#championshipSelect').val()
 
-    $.ajax({
-            'url': '../../BackEnd/API/Race/CreateRace.php',
-            'data': {
-                'raceTrack' : track,
-                'raceDateOfRace' : dateOfRace,
-                'raceCountry' : country,
-                'raceChampionshipID' : championshipID
-            },
-            'type': 'get',
-            'dataType': 'html',
-            'beforeSend':  () => {
-            }
-        })
-            .done( (response) => {
-                console.log(response)
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
-                Race Created
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-                document.getElementById('principal').appendChild(alert)
-            })
-            .fail( function (code, status) {
-                console.log('error', status, code)
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
-                Race Not Created
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-                document.getElementById('principal').appendChild(alert)
-            })
-            .always( function (xhr, status) {
-            });
-
-
-    /*
-
-
 
 
     var raw = `{\r\n    \"raceTrack\" : \"${track}\",
@@ -145,7 +101,7 @@ function createRace(){
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
     var requestOptions = {
-        method: 'get',
+        method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
@@ -156,7 +112,7 @@ function createRace(){
 
 
 
-    let result = fetch("../../backend/api/race/Createrace.php", requestOptions)
+    let result = fetch("http://localhost/gt3prostats/backend/api/race/Createrace.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result)
@@ -183,6 +139,4 @@ function createRace(){
             document.getElementById('principal').appendChild(alert)
         });
 
-
-     */
 }

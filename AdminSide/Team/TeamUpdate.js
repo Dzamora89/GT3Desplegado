@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -47,13 +47,13 @@ $( document ).ready(getSelect() )
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
@@ -67,7 +67,7 @@ function getSelect() {
     };
 
 
-    fetch("../../backend/api/team/getallteam.php", requestOptions1)
+    fetch("http://localhost/gt3prostats/backend/api/team/getallteam.php", requestOptions1)
         .then(response => response.json())
         .then(data => data.forEach((dato) => {
             let select = document.getElementById('updateSelect')
@@ -87,7 +87,7 @@ $('#updateSelect').change((() => {
         redirect: 'follow'
     };
 
-    let url = `../../backend/api/team/getteamByID.php?teamID=${document.getElementById("updateSelect").value}`
+    let url = `http://localhost/gt3prostats/backend/api/team/getteamByID.php?teamID=${document.getElementById("updateSelect").value}`
 
     fetch(url, requestOptions2)
         .then(response => response.json())
@@ -139,7 +139,8 @@ $('#updateSelect').change((() => {
 
 
 function updateTeam() {
-
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "text/plain");
 
 
     let teamID = document.getElementById("updateSelect").value
@@ -149,96 +150,48 @@ function updateTeam() {
     let teamTwitter = $('#teamTwitter').val()
     let teamWebsite = $('#teamWebsite').val()
     let teamCarBrand = $('#teamCarBrand').val()
-    $.ajax({
-            'url': '../../backend/api/Team/UpdateTeam.php',
-            'data': {
-                'teamID' : teamID,
-                'teamName' : teamName,
-                'teamOwner' : teamOwner,
-                'teamCountry' : teamCountry,
-                'teamTwitter' : teamTwitter,
-                'teamWebsite' : teamWebsite,
-                'teamCarBrand' : teamCarBrand
-            },
-            'type': 'post',
-            'dataType': 'html',
-            'beforeSend':  () => {
-            }
+
+
+    var raw = `{\r\n    \"teamID\" : \"${teamID}\", 
+    \"teamName\" : \"${teamName}\",   
+    \r\n    \"teamOwner\" : \"${teamOwner}\",
+    \r\n    \"teamCountry\" : \"${teamCountry}\",
+    \r\n    \"teamTwitter\" : \"${teamTwitter}\",
+    \r\n    \"teamWebsite\" : \"${teamWebsite}\",
+    \r\n    \"teamCarBrand\" : \"${teamCarBrand}\"}`;
+
+    var requestOptions3 = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+
+    fetch("http://localhost/gt3prostats/backend/api/Team/UpdateTeam.php", requestOptions3)
+        .then(response => response.text())
+        .then(result => {
+            console.log(result)
+            let alert = document.createElement("div")
+            alert.innerHTML =
+                `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Team Updated
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+
+            document.getElementById('principal').appendChild(alert)
         })
-            .done( (response) => {
-                console.log(response)
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
-                    Team Updated
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                `;
+        .catch(error => {
+            let alert = document.createElement("div")
+            alert.innerHTML =
+                `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Team NOT UPDATED
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
 
-                document.getElementById('principal').appendChild(alert)
-            })
-            .fail( function (code, status) {
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
-                    Team NOT UPDATED
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                `;
-
-                document.getElementById('principal').appendChild(alert)
-            })
-            .always( function (xhr, status) {
-            });
-
+            document.getElementById('principal').appendChild(alert)
+        });
     getSelect()
-
-    /*
-            var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "text/plain");
-
-
-        var raw = `{\r\n    \"teamID\" : \"${teamID}\",
-        \"teamName\" : \"${teamName}\",
-        \r\n    \"teamOwner\" : \"${teamOwner}\",
-        \r\n    \"teamCountry\" : \"${teamCountry}\",
-        \r\n    \"teamTwitter\" : \"${teamTwitter}\",
-        \r\n    \"teamWebsite\" : \"${teamWebsite}\",
-        \r\n    \"teamCarBrand\" : \"${teamCarBrand}\"}`;
-
-        var requestOptions3 = {
-            method: 'get',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        fetch("../../backend/api/Team/UpdateTeam.php", requestOptions3)
-            .then(response => response.text())
-            .then(result => {
-                console.log(result)
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
-                    Team Updated
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                `;
-
-                document.getElementById('principal').appendChild(alert)
-            })
-            .catch(error => {
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
-                    Team NOT UPDATED
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                `;
-
-                document.getElementById('principal').appendChild(alert)
-            });
-
-     */
 }
 

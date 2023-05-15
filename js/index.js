@@ -20,7 +20,7 @@ $.ajax({
         'url': './backend/api/Race/getAllRace.php',
         'data': {
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'json',
         'beforeSend':  () => {
         }

@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -50,20 +50,20 @@ var requestOptions = {
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
     .always( function (xhr, status) {
     });
 
-fetch("../../backend/api/Team/getAllTeam.php", requestOptions)
+fetch("http://localhost/gt3prostats/backend/api/Team/getAllTeam.php", requestOptions)
     .then(response => response.json())
     .then(data => data.sort((a ,b ) => {
         if (a.teamName > b.teamName){
@@ -84,47 +84,9 @@ function createCar(){
     let carTeamID = $('#teamName').val()
     let carNumber = $('#carNumber').val()
     let carClass = $('#className').val()
-$.ajax({
-        'url': '../../BackEnd/API/Car/CreateCar.php',
-        'data': {
-            'carManufacturer' : carManufacturer,
-            'carTeamID' : carTeamID,
-            'carNumber' : carNumber,
-            'carClass' : carClass
 
-        },
-        'type': 'get',
-        'dataType': 'html',
-        'beforeSend':  () => {
-        }
-    })
-        .done( (response) => {
-            console.log(response)
-            let alert = document.createElement("div")
-            alert.innerHTML =
-                `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
-                Car Created
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
 
-            document.getElementById('principal').appendChild(alert)
-        })
-        .fail( function (code, status) {
-            let alert = document.createElement("div")
-            alert.innerHTML =
-                `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
-                Car Not Created
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
 
-            document.getElementById('principal').appendChild(alert)
-        })
-        .always( function (xhr, status) {
-        });
-
-/*
     var raw = `{\r\n    \"carManufacturer\" : \"${carManufacturer}\",
     \r\n    \"carTeamID\" : \"${carTeamID}\",
     \r\n    \"carNumber\" : \"${carNumber}\",
@@ -136,7 +98,7 @@ $.ajax({
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
     var requestOptions = {
-        method: 'get',
+        method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
@@ -147,7 +109,7 @@ $.ajax({
 
 
 
-    let result = fetch("../../backend/api/Car/CreateCar.php", requestOptions)
+    let result = fetch("http://localhost/gt3prostats/backend/api/Car/CreateCar.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             //Todo controlar errorres de PDO
@@ -175,5 +137,4 @@ $.ajax({
             document.getElementById('principal').appendChild(alert)
         });
 
- */
 }

@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -47,13 +47,13 @@ $( document ).ready(getSelect() )
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
@@ -66,7 +66,7 @@ function getSelect() {
         method: 'GET',
         redirect: 'follow'
     };
-    fetch("../../backend/api/championship/getallchampionship.php", requestOptions1)
+    fetch("http://localhost/gt3prostats/backend/api/championship/getallchampionship.php", requestOptions1)
         .then(response => response.json())
         .then(data => data.forEach((dato) => {
             let select = document.getElementById('deleteSelect')
@@ -87,7 +87,7 @@ $('#deleteSelect').change(() => {
         redirect: 'follow'
     };
 
-    let url = `../../backend/api/race/getraceofchampionshipid.php?raceChampionshipID=${document.getElementById("deleteSelect").value}`
+    let url = `http://localhost/gt3prostats/backend/api/race/getraceofchampionshipid.php?raceChampionshipID=${document.getElementById("deleteSelect").value}`
 
     fetch(url, requestOptions1)
         .then(response => response.json())
@@ -110,7 +110,7 @@ $('#deleteSelect2').change(() => {
         redirect: 'follow'
     };
 
-    let url = `../../backend/api/Race/getRaceByID.php?raceID=${$('#deleteSelect2').val()}`
+    let url = `http://localhost/gt3prostats/backend/api/Race/getRaceByID.php?raceID=${$('#deleteSelect2').val()}`
     $('#showRace').show();
     fetch(url, requestOptions2)
         .then(response => response.json())
@@ -137,59 +137,22 @@ $('#deleteSelect2').change(() => {
 })
 
 function deleteRace() {
-/*    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "text/plain");*/
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "text/plain");
     let raceID = $('#deleteSelect2').val()
 
-$.ajax({
-        'url': '../../backend/api/race/Deleterace.php',
-        'data': {
-            'raceID' : raceID
-        },
-        'type': 'get',
-        'dataType': 'html',
-        'beforeSend':  () => {
-        }
-    })
-        .done( (response) => {
-            console.log(response)
-            let alert = document.createElement("div")
-            alert.innerHTML =
-                `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
-                Race Deleted
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-            document.getElementById('principal').appendChild(alert)
-        })
-        .fail( function (code, status) {
-            let alert = document.createElement("div")
-            alert.innerHTML =
-                `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
-                Race NOT DELETED
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
 
-            document.getElementById('principal').appendChild(alert)
-        })
-        .always( function (xhr, status) {
-        });
-
-    $('#deleteSelect').empty()
-    getSelect();
-
-/*    var raw = `{\r\n    \"raceID\" : \"${raceID}\"
+    var raw = `{\r\n    \"raceID\" : \"${raceID}\"
     \r\n}`;
 
     var requestOptions = {
-        method: 'get',
+        method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
     };
 
-    fetch("../../backend/api/race/Deleterace.php", requestOptions)
+    fetch("http://localhost/gt3prostats/backend/api/race/Deleterace.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result)
@@ -214,6 +177,7 @@ $.ajax({
             `;
 
             document.getElementById('principal').appendChild(alert)
-        });*/
-
+        });
+    $('#deleteSelect').empty()
+    getSelect();
 }

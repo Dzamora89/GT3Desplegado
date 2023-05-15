@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -46,13 +46,13 @@ function getCookieValue(cookieName) {
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
@@ -68,50 +68,6 @@ function createChampionship(){
     let championshipTwitter = $('#championshipTwitter').val()
     let championshipYouTube = $('#championshipYouTube').val()
 
-    $.ajax({
-            'url': '../../backend/api/championship/Createchampionship.php',
-            'data': {
-                'championshipName' : championshipName,
-                'championshipCountry' : championshipCountry,
-                'championshipSeason' : championshipSeason,
-                'championshipWebsite' : championshipWebsite,
-                'championshipFacebook' : championshipFacebook,
-                'championshipTwitter' : championshipTwitter,
-                'championshipYoutube' : championshipYouTube
-            },
-            'type': 'get',
-            'dataType': 'html',
-            'beforeSend':  () => {
-            }
-        })
-            .done( (response) => {
-                console.log(response)
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
-                Championship Created
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-                document.getElementById('principal').appendChild(alert)
-            })
-            .fail( function (code, status) {
-                console.log('error', status)
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
-                Championship Not Created
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-                document.getElementById('principal').appendChild(alert)
-            })
-            .always( function (xhr, status) {
-            });
-
-    /*
 
     var raw = `{\r\n    \"championshipName\" : \"${championshipName}\",
     \r\n    \"championshipCountry\" : \"${championshipCountry}\",
@@ -127,7 +83,7 @@ function createChampionship(){
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
     var requestOptions = {
-        method: 'get',
+        method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
@@ -138,7 +94,7 @@ function createChampionship(){
 
 
 
-    let result = fetch("../../backend/api/championship/Createchampionship.php", requestOptions)
+    let result = fetch("http://localhost/gt3prostats/backend/api/championship/Createchampionship.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             let alert = document.createElement("div")
@@ -164,6 +120,4 @@ function createChampionship(){
             document.getElementById('principal').appendChild(alert)
         });
 
-
-     */
 }

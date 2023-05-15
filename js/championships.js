@@ -30,10 +30,8 @@ $.ajax({
             $('#championships').append(
                 `
                 <div class="card" style="width: 18rem;">
-                    <div class="card-header">
-                        <h5 class="card-title">${e.championshipName} , ${e.championshipSeason} </h5>
-                    </div>
                     <div class="card-body d-flex justify-content-between flex-column">
+                        <h5 class="card-title">${e.championshipName} , ${e.championshipSeason} </h5>
                         <p class="card-text">Country: ${e.championshipCountry} </p>
                         <p class="card-text">Youtube : <a href="${e.championshipYoutube}" class="link-primary">${e.championshipYoutube}</a></p>
                         <p class="card-text">Website : <a href="${e.championshipWebsite}" class="link-primary">${e.championshipWebsite}</a></p>

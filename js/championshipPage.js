@@ -23,16 +23,13 @@ $.ajax({
         'data': {
             'ChampionshipID' : myParam
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'json',
         'beforeSend':  () => {
         }
     })
         .done( (response) => {
             $('#championshipName').html(`${response[0].championshipName}`)
-            response.sort( (a,b) => {
-                a.championshipEntryTotalPoints  - b.championshipEntryTotalPoints
-            })
             response.forEach( e => {
                 $('#championshipTable tbody').append(
                     `
@@ -55,7 +52,7 @@ $.ajax({
 
 //Ajax para llenar el Selector de Carreras
 $.ajax({
-    'url': './backend/api/race/getraceofchampionshipid.php',
+    'url': 'http://localhost/gt3prostats/backend/api/race/getraceofchampionshipid.php',
         'data': {
             'raceChampionshipID' : myParam
         },
@@ -81,11 +78,11 @@ $.ajax({
 
 $(document).on('change', '#raceSelect' , (e) => {
     $.ajax({
-            'url': './backend/api/raceresult/getraceresultbyraceid.php',
+            'url': 'http://localhost/gt3prostats/backend/api/raceresult/getraceresultbyraceid.php',
             'data': {
                 'raceID' : $('#raceSelect').val()
             },
-            'type': 'get',
+            'type': 'post',
             'dataType': 'json',
             'beforeSend':  () => {
             }
@@ -120,8 +117,8 @@ $(document).on('change', '#raceSelect' , (e) => {
                         <td>${e.driverFirstName} ${e.driverLastName}</td>
                         <td>${e.carManufacturer}</td>
                         <td>${e.carNumber}</td>
-                        <td>${e.raceResultLaps} Laps</td>
-                        <td>${e.raceResultGap} s</td>
+                        <td>${e.raceResultLaps}</td>
+                        <td>${e.raceResultGap}</td>
                         <td>${e.raceResultPointsScored}</td>
                         <td>${e.driverELO}</td>
                         <td>${e.raceResultEloChanged}</td>

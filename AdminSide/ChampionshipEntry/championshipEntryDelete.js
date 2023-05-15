@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -46,13 +46,13 @@ function getCookieValue(cookieName) {
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
@@ -63,7 +63,7 @@ function championshipSelect() {
         method: 'GET', redirect: 'follow'
     };
 
-    fetch("../../backend/api/championship/getallchampionship.php", requestOptions)
+    fetch("http://localhost/gt3prostats/backend/api/championship/getallchampionship.php", requestOptions)
         .then(response => response.json())
         .then(data => data.sort((a,b) => {
             if (a.championshipSeason > b.championshipSeason) {
@@ -88,18 +88,18 @@ $(document).ready(championshipSelect())
 $(document).on('change', '#championshipEntryChampionshipID', loadEntries)
 function loadEntries() {
     $.ajax({
-        'url': '../../backend/api/championshipentry/getchampionshipentrybychampionshipID.php',
+        'url': 'http://localhost/gt3prostats/backend/api/championshipentry/getchampionshipentrybychampionshipID.php',
         'data': {
             'ChampionshipID' : $('#championshipEntryChampionshipID').val()
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'json',
         'beforeSend':  () => {
         }
     })
         .done( function (response) {
             $('#EntriesList').html('')
-            if (response.message != 'No get found'){
+            if (response.message != 'No post found'){
                 $('#EntriesList').html(`
                 <table class="table table-striped mt-5 bg-light">
                     <thead>
@@ -135,11 +135,11 @@ function loadEntries() {
 
 $(document).on('click','.btn-danger', (event) => {
     $.ajax({
-            'url': '../../backend/api/championshipentry/deletechampionshipEntry.php',
+            'url': 'http://localhost/gt3prostats/backend/api/championshipentry/deletechampionshipEntry.php',
             'data': {
                 'championshipEntryID' : $(event.target).val()
             },
-            'type': 'get',
+            'type': 'post',
             'dataType': 'html',
             'beforeSend':  () => {
             }

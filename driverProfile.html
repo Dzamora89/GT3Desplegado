@@ -15,34 +15,22 @@
     <script src="js/driverProfile.js" defer></script>
 </head>
 <body class="bg-light">
-<div class="container-fluid mt-3 ms-3">
-    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="./ranking.html">Ranking</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Profile</li>
-        </ol>
-    </nav>
-</div>
 
-
-<div class="container-fluid d-flex">
-    <div class="container-fluid d-flex align-items-center justify-content-center border rounded-3">
-        <img id="driverImgUrl" src="" alt="" class="img-fluid border rounded-3 ms-3 mt-3 shadow">
-    </div>
-    <div class="container-fluid mt-3">
-        <div id="profile" class="container-fluid">
-        </div>
-        <div class="container-fluid mt-3">
-            <div class="container-fluid d-flex flex-column align-items-start  justify-content-start border rounded-3 mt-3"  id="races" >
-                <h2 class="fw-bolder">Last Results</h2>
-            </div>
-            <div class="container-fluid border rounded-3 mt-3" id="championshipEntries">
-                <h2 class="fw-bolder">Championship Entries</h2>
-            </div>
-        </div>
-    </div>
+<div class="container-fluid d-flex justify-content-center mt-3">
+    <h1>Driver Profile</h1>
 </div>
+<div class="container-fluid mt-3 mx-5 d-flex flex-column flex-lg-row gap-3">
+    <div id="info" class="container-fluid d-flex flex-column">
+
+    </div>
+    <div class="container-fluid d-flex flex-column align-items-start  justify-content-start" id="races" >
+        <h2 class="fw-bolder">Last Results</h2>
+    </div>
+    <div class="container-fluid" id="championshipEntries">
+        <h2 class="fw-bolder">Championship Entries</h2>
+    </div>
+    </div>
+
 <footer class="container-fluid mt-3">
     <ul class="list-unstyled d-flex flex-column flex-lg-row gap-lg-3 justify-content-lg-center align-items-center">
         <li>GT3 ProStats &copy; <span id="date">2022</span></li>

@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -60,7 +60,7 @@ $(document).on('change','#championshipSelect', (event) => {
         `)
 
         $.ajax({
-            'url': '../../backend/api/race/getraceofchampionshipid.php',
+            'url': 'http://localhost/gt3prostats/backend/api/race/getraceofchampionshipid.php',
             'data': {
                 'raceChampionshipID' : $('#championshipSelect').val()
             },
@@ -82,7 +82,7 @@ $(document).on('change','#championshipSelect', (event) => {
             });
     }else {
         $.ajax({
-            'url': '../../backend/api/race/getraceofchampionshipid.php',
+            'url': 'http://localhost/gt3prostats/backend/api/race/getraceofchampionshipid.php',
             'data': {
                 'raceChampionshipID' : $('#championshipSelect').val()
             },
@@ -134,11 +134,11 @@ $(document).on('change','#raceSelect', (event) => {
     `)
 
     $.ajax({
-        'url': '../../backend/api/raceresult/getraceresultbyraceid.php',
+        'url': 'http://localhost/gt3prostats/backend/api/raceresult/getraceresultbyraceid.php',
         'data': {
             'raceID' : $('#raceSelect').val()
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'json',
         'beforeSend':  () => {
         }
@@ -204,7 +204,7 @@ $(document).on('click', '#Borrar', (event) => {
     for (let i = 0; i < drivers.length; i++) {
         let eloTotal =  parseInt($('.driverELO').eq(i).val()) - parseInt($('.eloUpdated').eq(i).val())
         $.ajax({
-            'url': '../../backend/api/raceresult/deleteraceresult.php',
+            'url': 'http://localhost/gt3prostats/backend/api/raceresult/deleteraceresult.php',
             'data': {
                 'raceresultPointsScored' : $('.points').eq(i).val() ,
                 'driverELO' : eloTotal,
@@ -212,7 +212,7 @@ $(document).on('click', '#Borrar', (event) => {
                 'championshipID' : $('#championshipSelect').val(),
                 'raceResultDriverID' : $('.pilotos').eq(i).val(),
             },
-            'type': 'get',
+            'type': 'post',
             'dataType': 'html',
             'beforeSend':  () => {
             }
@@ -247,13 +247,13 @@ $(document).on('click', '#Borrar', (event) => {
 function cargarNavBar(){
     $.ajax({
         'url': '../Admin/Navbar.html',
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
     })
         .done( (response) => {
-            $('.navbar').html(response);
+            $('nav').html(response);
         })
         .fail( function (code, status) {
         })
@@ -268,8 +268,8 @@ function getSelect() {
     `)
 
     $.ajax({
-        'url': '../../backend/api/championship/getAllchampionship.php',
-        'type': 'get',
+        'url': 'http://localhost/gt3prostats/backend/api/championship/getAllchampionship.php',
+        'type': 'post',
         'dataType': 'json',
         'beforeSend':  () => {
         }

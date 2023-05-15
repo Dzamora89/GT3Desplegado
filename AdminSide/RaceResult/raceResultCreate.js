@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -60,7 +60,7 @@ $(document).on('change','#championshipSelect', (event) => {
         `)
 
         $.ajax({
-            'url': '../../backend/api/race/getraceofchampionshipid.php',
+            'url': 'http://localhost/gt3prostats/backend/api/race/getraceofchampionshipid.php',
             'data': {
                 'raceChampionshipID' : $('#championshipSelect').val()
             },
@@ -82,7 +82,7 @@ $(document).on('change','#championshipSelect', (event) => {
             });
     }else {
         $.ajax({
-            'url': '../../backend/api/race/getraceofchampionshipid.php',
+            'url': 'http://localhost/gt3prostats/backend/api/race/getraceofchampionshipid.php',
             'data': {
                 'raceChampionshipID' : $('#championshipSelect').val()
             },
@@ -131,11 +131,11 @@ $(document).on('change','#raceSelect', (event) => {
         </table>
     `)
     $.ajax({
-            'url': '../../backend/api/championshipentry/getchampionshipentrybychampionshipID.php',
+            'url': 'http://localhost/gt3prostats/backend/api/championshipentry/getchampionshipentrybychampionshipID.php',
             'data': {
                 'ChampionshipID' : $('#championshipSelect').val()
             },
-            'type': 'get',
+            'type': 'post',
             'dataType': 'json',
             'beforeSend':  () => {
             }
@@ -143,7 +143,6 @@ $(document).on('change','#raceSelect', (event) => {
             .done( (response) => {
                 response.forEach((e) => {
                     drivers.push(e)
-                    console.log(e)
                     $('#resultTable tbody').append(
                         `
                         <tr>
@@ -168,7 +167,7 @@ $(document).on('change','#raceSelect', (event) => {
                 for (let i = 0; i < response.length; i++) {
                     $(`.pilotos`).append(
                         `
-                            <option value="${response[i].championshipEntryDriverID}"> ${response[i].driverLastName} , ${response[i].driverFirstName} </option>
+                            <option value="${response[i].championshipEntryDriverID}"> ${response[i].driverFirstName} ${response[i].driverLastName}</option>
                         `
                     )
                 }
@@ -181,7 +180,7 @@ $(document).on('change','#raceSelect', (event) => {
 
 //Aqui vamos a hacerlo para que al seleccionar un piloto se rellene el numero del coche y la marca de forma automatica.
 $(document).on('change', '.pilotos', (event) => {
-    let selectedDriver = drivers.find((element) => parseInt(element.championshipEntryDriverID) === parseInt(event.target.value))
+    let selectedDriver = drivers.find((element) => element.championshipEntryDriverID === $(event.target).val())
     //Vuelves 1 atras para ir al TR y vas 1 TD adelante y ya el hijo es el input del numero
     $(event.target).parent().next().children().eq(0).val(selectedDriver.carNumber)
     $(event.target).parent().next().children().eq(1).val(selectedDriver.carID)
@@ -204,14 +203,13 @@ $(document).on('click', '#guardar', (event) => {
             }
         }
     }
-    console.log(eloChanges)
     eloChanges.forEach((value, index, array) => {
         $('.eloUpdated').eq(index).val(`${value}`)
     })
     for (let i = 0; i < drivers.length; i++) {
-        let eloTotal =  parseInt($('.driverElo').eq(i).val()) + eloChanges[i]
+        let eloTotal =  parseInt($('.driverELO').eq(i).val()) + parseInt($('.eloUpdated').eq(i).val())
         $.ajax({
-                'url': '../../backEnd/API/RaceResult/CreateRaceResult.php',
+                'url': 'http://localhost/gt3prostats/backend/api/raceresult/createraceresult.php',
                 'data': {
                     'raceresultCarID' : $('.carID').eq(i).val(),
                     'raceresultRaceID' : $('#raceSelect').val(),
@@ -224,7 +222,7 @@ $(document).on('click', '#guardar', (event) => {
                     'raceresultPosition' :  $('.posiciones').eq(i).val(),
                     'championshipID' : $('#championshipSelect').val()
                 },
-                'type': 'get',
+                'type': 'post',
                 'dataType': 'html',
                 'beforeSend':  () => {
                 }
@@ -290,8 +288,8 @@ function getSelect() {
     `)
 
     $.ajax({
-            'url': '../../backend/api/championship/getAllchampionship.php',
-            'type': 'get',
+            'url': 'http://localhost/gt3prostats/backend/api/championship/getAllchampionship.php',
+            'type': 'post',
             'dataType': 'json',
             'beforeSend':  () => {
             }
@@ -312,13 +310,13 @@ function getSelect() {
 function cargarNavBar(){
     $.ajax({
         'url': '../Admin/Navbar.html',
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
     })
         .done( (response) => {
-            $('.navbar').html(response);
+            $('nav').html(response);
         })
         .fail( function (code, status) {
         })

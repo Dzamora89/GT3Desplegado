@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -47,13 +47,13 @@ $( document ).ready(getSelect() )
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
@@ -67,7 +67,7 @@ function getSelect() {
     };
 
 
-    fetch("../../backend/api/driver/getalldriver.php", requestOptions)
+    fetch("http://localhost/gt3prostats/backend/api/driver/getalldriver.php", requestOptions)
         .then(response => response.json())
         .then(data => data.sort((a,b) => {
             if (a.driverLastName > b.driverLastName){
@@ -98,7 +98,7 @@ $('#updateSelect').change((() => {
         redirect: 'follow'
     };
 
-    let url = `../../backend/api/Driver/getDriverByID.php?driverID=${$("#updateSelect").val()}`
+    let url = `http://localhost/gt3prostats/backend/api/Driver/getDriverByID.php?driverID=${$("#updateSelect").val()}`
 
     fetch(url, requestOptions)
         .then(response => response.json())
@@ -122,20 +122,16 @@ $('#updateSelect').change((() => {
             <input  id="urlInput" type="url" class="form-control" placeholder="Driver Website" aria-label="DriverWebsite" aria-describedby="Driver-Website" value="${jsonResult.driverWebsite}">
         </div>
         <div class="input-group mb-3 w-50">
-            <span class="input-group-text" id="driverImgUrlLabel">Driver Image URL</span>
-            <input id="driverImgUrl" type="url" class="form-control" placeholder="driverImgUrl" aria-label="DriverWebsite" aria-describedby="Driver-Website" value="${jsonResult.driverImgUrl}">
-        </div>
-        <div class="input-group mb-3 w-50">
-            <span class="input-group-text" id="Twitter">Twitter </span>
-            <input id="twitterInput" type="text" class="form-control" placeholder="Twitter Handle" aria-label="Twitter" aria-describedby="Twitter" value="${jsonResult.driverTwitter}">
+            <span class="input-group-text" id="Twitter">Twitter @</span>
+            <input  id="twitterInput" type="text" class="form-control" placeholder="Twitter Handle" aria-label="Twitter" aria-describedby="Twitter" value="${jsonResult.driverTwitter}">
         </div>
         <div class="input-group mb-3 w-25">
             <span class="input-group-text" id="DriverStatus">Driver Status</span>
-            <input id="driverStatusInput" type="text" class="form-control" placeholder="Active" aria-label="DriverStatus"  aria-describedby="Driver-Status" value="${jsonResult.driverStatus}">
+            <input id="driverStatusInput" type="text" class="form-control" placeholder="Active" aria-label="DriverStatus" value="Active" aria-describedby="Driver-Status" value="${jsonResult.driverStatus}">
         </div>
         <div class="input-group mb-3 w-25">
             <span class="input-group-text" id="DriverELo">Initial Elo Rating</span>
-            <input id="initialEloInput" type="number" class="form-control" placeholder="Elo Rating"  aria-label="LastName" aria-describedby="Elo-Rating" value="${jsonResult.driverElo}">
+            <input id="initialEloInput" type="number" class="form-control" placeholder="Elo Rating" value="1500" aria-label="LastName" aria-describedby="Elo-Rating" value="${jsonResult.driverElo}">
         </div>
         <div class="input-group mb-3 w-25">
             <span class="input-group-text" id="DriverbirthDate">Driver birth date</span>
@@ -157,6 +153,10 @@ $('#updateSelect').change((() => {
 
 
 function updateDriver() {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "text/plain");
+
+
     let driverID = $('#updateSelect').val()
     let firstName = $('#firstNameInput').val()
     let lastName = $('#lastNameInput').val()
@@ -166,56 +166,7 @@ function updateDriver() {
     let status = $('#driverStatusInput').val()
     let initialElo = $('#initialEloInput').val()
     let birthday = $('#birthDayInput').val()
-    let driverImgUrl = $('#driverImgUrl').val()
 
-
-    $.ajax({
-        'url': '../../backend/api/driver/UpdateDriver.php',
-        'data': {
-            'driverID' : driverID,
-            'driverFirstName' :firstName,
-            'driverLastName' : lastName,
-            'driverCountry' : country,
-            'driverDateOfBirth' : birthday,
-            'driverWebsite' : url,
-            'driverTwitter' : twitter,
-            'driverStatus' : status,
-            'driverELO' : initialElo,
-            'driverImgUrl' : driverImgUrl
-        },
-        'type': 'get',
-        'dataType': 'html',
-        'beforeSend':  () => {
-        }
-    })
-        .done( (response) => {
-            let alert = document.createElement("div")
-            alert.innerHTML =
-                `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
-                Driver Updated
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-            document.getElementById('principal').appendChild(alert)        })
-        .fail( function (code, status) {
-            console.log(status)
-
-            let alert = document.createElement("div")
-            alert.innerHTML =
-                `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
-                Driver NOT UPDATED
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-            document.getElementById('principal').appendChild(alert)
-        })
-        .always( function (xhr, status) {
-        });
-    /*
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "text/plain");
 
     var raw = `{\r\n    \"driverID\" : \"${driverID}\",
     \r\n    \"driverFirstName\" : \"${firstName}\",
@@ -229,13 +180,13 @@ function updateDriver() {
     \r\n    \"driverELO\" : \"${initialElo}\"\r\n}`;
 
     var requestOptions = {
-        method: 'get',
+        method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
     };
 
-    fetch("../../backend/api/driver/UpdateDriver.php", requestOptions)
+    fetch("http://localhost/gt3prostats/backend/api/driver/UpdateDriver.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result)
@@ -262,7 +213,4 @@ function updateDriver() {
 
             document.getElementById('principal').appendChild(alert)
         });
-
-     */
-
 }

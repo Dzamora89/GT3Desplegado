@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -47,13 +47,13 @@ function getCookieValue(cookieName) {
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
@@ -64,7 +64,7 @@ var requestOptions = {
 };
 //Todo: Cambiar los Select al evento de Jquery para Change on Select
 
-fetch("../../backend/api/championship/getallchampionship.php", requestOptions)
+fetch("http://localhost/gt3prostats/backend/api/championship/getallchampionship.php", requestOptions)
     .then(response => response.json())
     .then(data => data.forEach((dato) => {
         let select = document.getElementById('updateSelect')
@@ -81,7 +81,7 @@ $('#updateSelect').change(function () {
         method: 'GET', redirect: 'follow'
     };
 
-    let url = `../../backend/api/championship/getchampionshipByID.php?championshipID=${$('#updateSelect').val()}`
+    let url = `http://localhost/gt3prostats/backend/api/championship/getchampionshipByID.php?championshipID=${$('#updateSelect').val()}`
 
     fetch(url, requestOptions)
         .then(response => response.json())
@@ -146,48 +146,6 @@ function updateChampionship() {
     let championshipTwitter = $('#championshipTwitter').val()
     let championshipYoutube = $('#championshipYoutube').val()
 
-    $.ajax({
-            'url': '../../backend/api/championship/updatechampionship.php',
-            'data': {
-                'championshipID' : championshipID,
-                'championshipName' : championshipName,
-                'championshipCountry' : championshipCountry,
-                'championshipSeason' : championshipSeason,
-                'championshipWebsite' : championshipWebsite,
-                'championshipFacebook' : championshipFacebook,
-                'championshipTwitter' : championshipTwitter,
-                'championshipYoutube' : championshipYoutube
-            },
-            'type': 'get',
-            'dataType': 'html',
-            'beforeSend':  () => {
-            }
-        })
-            .done( (response) => {
-                console.log(response)
-                let alert = document.createElement("div")
-                alert.innerHTML = `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
-                Championship Updated
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-                document.getElementById('principal').appendChild(alert)
-            })
-            .fail( function (code, status) {
-                console.log('error', status)
-                let alert = document.createElement("div")
-                alert.innerHTML = `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
-                Championship Not Updated
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-                document.getElementById('principal').appendChild(alert)
-            })
-            .always( function (xhr, status) {
-            });
-    /*
     const raw = `{ "championshipID" : "${championshipID}",
     "championshipName" : "${championshipName}",
     "championshipCountry" : "${championshipCountry}",
@@ -201,11 +159,11 @@ function updateChampionship() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
     var requestOptions = {
-        method: 'get', headers: myHeaders, body: raw, redirect: 'follow'
+        method: 'POST', headers: myHeaders, body: raw, redirect: 'follow'
     };
 
 
-    fetch("../../backend/api/championship/updatechampionship.php", requestOptions)
+    fetch("http://localhost/gt3prostats/backend/api/championship/updatechampionship.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result)
@@ -230,6 +188,4 @@ function updateChampionship() {
             document.getElementById('principal').appendChild(alert)
         });
 
-
-     */
 }

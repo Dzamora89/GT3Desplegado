@@ -19,7 +19,7 @@ $.ajax({
         'url': './backend/api/driver/getalldriver.php',
         'data': {
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'json',
         'beforeSend':  () => {
         }

@@ -2,12 +2,12 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': '../../backend/api/login/checkToken.php',
+        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'get',
+        'type': 'post',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -47,13 +47,13 @@ $(document).ready(getSelect())
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'get',
+    'type': 'post',
     'dataType': 'html',
     'beforeSend':  () => {
     }
 })
     .done( (response) => {
-        $('.navbar').html(response);
+        $('nav').html(response);
     })
     .fail( function (code, status) {
     })
@@ -66,7 +66,7 @@ function getSelect() {
         method: 'GET',
         redirect: 'follow'
     };
-    fetch("../../backend/api/Car/getallCar.php", requestOptions)
+    fetch("http://localhost/gt3prostats/backend/api/Car/getallCar.php", requestOptions)
         .then(response => response.json())
         .then(data => data.forEach( (dato) => {
             let select = document.getElementById('updateSelect')
@@ -84,7 +84,7 @@ $('#updateSelect').change(() => {
         redirect: 'follow'
     };
 
-    let url = `../../backend/api/Car/getCarByID.php?carID=${document.getElementById("updateSelect").value}`
+    let url = `http://localhost/gt3prostats/backend/api/Car/getCarByID.php?carID=${document.getElementById("updateSelect").value}`
 
     fetch(url, requestOptions)
         .then(response => response.json())
@@ -105,6 +105,8 @@ $('#updateSelect').change(() => {
                 <input id="className" type="text" class="form-control"  aria-label="Class" aria-describedby="Class" value="${result.carClass}">
         </div>
         <select id="teamName" class="form-select w-50" aria-label="Team Select">
+           
+
         </select>
         </form>
         <button class="btn bg-success align-items w-50 m-auto mt-5" onclick="updateCar()"> Update Car </button>
@@ -114,7 +116,7 @@ $('#updateSelect').change(() => {
     `;
             let team = result.carTeamID
 
-            fetch("../../backend/api/Team/getAllTeam.php", requestOptions)
+            fetch("http://localhost/gt3prostats/backend/api/Team/getAllTeam.php", requestOptions)
                 .then(response => response.json())
                 .then(data => data.forEach( (dato) => {
                     if (dato.teamID === team){
@@ -131,56 +133,6 @@ $('#updateSelect').change(() => {
 
 
 function updateCar() {
-    let carID = document.getElementById("updateSelect").value
-    let carManufacturer = $('#carManufacturer').val()
-    let carTeamID = $('#teamName').val()
-    let carNumber = $('#carNumber').val()
-    let carClass = $('#className').val()
-
-
-    $.ajax({
-            'url': '../../BackEnd/API/Car/UpdateCar.php',
-            'data': {
-                'carID' : carID,
-                'carManufacturer' : carManufacturer,
-                'carTeamID' : carTeamID,
-                'carNumber' : carNumber,
-                'carClass' : carClass
-
-            },
-            'type': 'get',
-            'dataType': 'html',
-            'beforeSend':  () => {
-            }
-        })
-            .done( (response) => {
-                console.log(response)
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
-                Car Updated
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-                document.getElementById('principal').appendChild(alert)
-            })
-            .fail( function (code, status) {
-                let alert = document.createElement("div")
-                alert.innerHTML =
-                    `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
-                Car NOT UPDATED
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            `;
-
-                document.getElementById('principal').appendChild(alert)
-            })
-            .always( function (xhr, status) {
-            });
-    getSelect()
-
-    /*
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
 
@@ -199,13 +151,13 @@ function updateCar() {
     \r\n    \"carClass\" : \"${carClass}\"}`;
 
     var requestOptions = {
-        method: 'get',
+        method: 'POST',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
     };
 
-    fetch("../../backend/api/car/UpdateCar.php", requestOptions)
+    fetch("http://localhost/gt3prostats/backend/api/car/UpdateCar.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result)
@@ -230,6 +182,5 @@ function updateCar() {
 
             document.getElementById('principal').appendChild(alert)
         });
-
-     */
+    getSelect()
 }
