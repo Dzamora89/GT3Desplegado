@@ -16,7 +16,7 @@ $db = $database->connect();
 $championshipEntries = new ChampionshipEntry($db);
 
 //Car  Query
-$championshipEntries->championshipEntryDriverID = $_POST['driverID'];
+$championshipEntries->championshipEntryDriverID = $_GET['driverID'];
 $result = $championshipEntries->getChampionshipEntriesByDriverID();
 //Get Row count
 $rowNumber = $result->rowCount();

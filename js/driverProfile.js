@@ -50,7 +50,7 @@ $.ajax({
         'data': {
             'driverID' : myParam
         },
-        'type': 'post',
+        'type': 'get',
         'dataType': 'json',
         'beforeSend':  () => {
         }
@@ -77,7 +77,7 @@ $.ajax({
     'data': {
         'driverID' : myParam
     },
-    'type': 'post',
+    'type': 'get',
     'dataType': 'json',
     'beforeSend':  () => {
     }

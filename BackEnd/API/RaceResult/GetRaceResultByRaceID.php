@@ -14,7 +14,7 @@ $db = $database->connect();
 $raceResult = new RaceResult($db);
 //Get the ID
 
-$raceResult->raceresultRaceID = $_POST['raceID'];
+$raceResult->raceresultRaceID = $_GET['raceID'];
 //Get Car
 $result = $raceResult->getRaceResultByRaceID();
 

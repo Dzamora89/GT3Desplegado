@@ -23,7 +23,7 @@ $.ajax({
         'data': {
             'ChampionshipID' : myParam
         },
-        'type': 'post',
+        'type': 'get',
         'dataType': 'json',
         'beforeSend':  () => {
         }
@@ -52,7 +52,7 @@ $.ajax({
 
 //Ajax para llenar el Selector de Carreras
 $.ajax({
-    'url': 'http://localhost/gt3prostats/backend/api/race/getraceofchampionshipid.php',
+    'url': './backend/api/race/getraceofchampionshipid.php',
         'data': {
             'raceChampionshipID' : myParam
         },
@@ -78,11 +78,11 @@ $.ajax({
 
 $(document).on('change', '#raceSelect' , (e) => {
     $.ajax({
-            'url': 'http://localhost/gt3prostats/backend/api/raceresult/getraceresultbyraceid.php',
+            'url': './backend/api/raceresult/getraceresultbyraceid.php',
             'data': {
                 'raceID' : $('#raceSelect').val()
             },
-            'type': 'post',
+            'type': 'get',
             'dataType': 'json',
             'beforeSend':  () => {
             }

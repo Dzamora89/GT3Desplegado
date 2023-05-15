@@ -1,7 +1,7 @@
 //Cargar el NavBar
     $.ajax({
             'url': './navbar.html',
-            'type': 'post',
+            'type': 'get',
             'dataType': 'html',
             'beforeSend':  () => {
             }
@@ -19,7 +19,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-            'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
+            'url': './backend/api/login/checkToken.php',
             'data': {
                 'username' : getCookieValue('username'),
                 'token' : getCookieValue('token')
@@ -68,7 +68,7 @@ function getCookieValue(cookieName) {
 let fecha = new Date()
 $('#date').text(`${fecha.getFullYear()}`)
 $.ajax({
-    'url': 'http://localhost/gt3prostats/backend/api/Race/getAllRace.php',
+    'url': './backend/api/Race/getAllRace.php',
     'data': {
     },
     'type': 'post',
