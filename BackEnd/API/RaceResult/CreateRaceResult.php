@@ -24,20 +24,20 @@ $championshipEntry = new ChampionshipEntry($db);
 $raceResult = new RaceResult($db);
 // Get de raw posted data
 
-$raceResult->raceResultCarID = $_POST['raceresultCarID'];
-$raceResult->raceresultRaceID = $_POST['raceresultRaceID'];
-$raceResult->raceResultDriverID = $_POST['raceResultDriverID'];
-$raceResult->raceresultGap = $_POST['raceresultGap'];
-$raceResult->raceresultLaps = $_POST['raceresultLaps'];
-$raceResult->raceresultPointsScored = $_POST['raceresultPointsScored'];
-$raceResult->raceresultEloChanged = $_POST['raceresultEloChanged'];
-$raceResult->raceresultPosition = $_POST['raceresultPosition'];
+$raceResult->raceResultCarID = $_GET['raceresultCarID'];
+$raceResult->raceresultRaceID = $_GET['raceresultRaceID'];
+$raceResult->raceResultDriverID = $_GET['raceResultDriverID'];
+$raceResult->raceresultGap = $_GET['raceresultGap'];
+$raceResult->raceresultLaps = $_GET['raceresultLaps'];
+$raceResult->raceresultPointsScored = $_GET['raceresultPointsScored'];
+$raceResult->raceresultEloChanged = $_GET['raceresultEloChanged'];
+$raceResult->raceresultPosition = $_GET['raceresultPosition'];
 
 
-$driver->driverID = $_POST['raceResultDriverID'];
+$driver->driverID = $_GET['raceResultDriverID'];
 
-$championshipEntry->championshipEntryChampionshipID = $_POST['championshipID'];
-$championshipEntry->championshipEntryDriverID = $_POST['raceResultDriverID'];
+$championshipEntry->championshipEntryChampionshipID = $_GET['championshipID'];
+$championshipEntry->championshipEntryDriverID = $_GET['raceResultDriverID'];
 
 
 
@@ -46,8 +46,8 @@ $championshipEntry->championshipEntryDriverID = $_POST['raceResultDriverID'];
 //Create the race
 if ($raceResult->createRaceResult()) {
     echo json_encode(array('message' => 'Race Result Created'));
-    $championshipEntry->updateTheChampionship($_POST['raceresultPointsScored']);
-    $driver->updateElo($_POST['driverELO']);
+    $championshipEntry->updateTheChampionship($_GET['raceresultPointsScored']);
+    $driver->updateElo($_GET['driverELO']);
 } else {
     echo json_encode(
         array('message' => 'Race Result Not created')

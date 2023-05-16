@@ -17,7 +17,7 @@ $db = $database->connect();
 //Initialize the driver
 $championshipEntry = new ChampionshipEntry($db);
 
-$championshipEntry->championshipEntryID = $_POST['championshipEntryID'];
+$championshipEntry->championshipEntryID = $_GET['championshipEntryID'];
 // Delete
 if ($championshipEntry->deleteChampionshipEntry()) {
     echo json_encode(

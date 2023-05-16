@@ -22,8 +22,8 @@ $championshipEntry = new ChampionshipEntry($db);
 
 
 
-$championshipEntry->championshipEntryID = $_POST['championshipEntryID'];
-$championshipEntry->championshipEntryTotalPoints = $_POST['championshipEntryTotalPoints'];
+$championshipEntry->championshipEntryID = $_GET['championshipEntryID'];
+$championshipEntry->championshipEntryTotalPoints = $_GET['championshipEntryTotalPoints'];
 
 // Update
 

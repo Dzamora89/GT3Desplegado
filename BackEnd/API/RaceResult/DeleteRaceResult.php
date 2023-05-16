@@ -21,16 +21,16 @@ $raceResult = new RaceResult($db);
 $driver = new Driver($db);
 $championshipEntry = new ChampionshipEntry($db);
 
-$raceResult->raceResultID = $_POST['raceresultID'];
-$championshipEntry->championshipEntryChampionshipID = $_POST['championshipID'];
-$championshipEntry->championshipEntryDriverID = $_POST['raceResultDriverID'];
+$raceResult->raceResultID = $_GET['raceresultID'];
+$championshipEntry->championshipEntryChampionshipID = $_GET['championshipID'];
+$championshipEntry->championshipEntryDriverID = $_GET['raceResultDriverID'];
 
-$driver->driverID = $_POST['raceResultDriverID'];
+$driver->driverID = $_GET['raceResultDriverID'];
 // Delete
 
 if ($raceResult->deleteRaceResult()) {
-    $championshipEntry->updateTheChampionship(intval($_POST['raceresultPointsScored']) * invertir);
-    $driver->updateElo($_POST['driverELO']);
+    $championshipEntry->updateTheChampionship(intval($_GET['raceresultPointsScored']) * invertir);
+    $driver->updateElo($_GET['driverELO']);
     echo json_encode(
         array('message' => 'Race Result Deleted')
     );

@@ -13,8 +13,8 @@ $db = $database->connect();
 
 $user = new User($db);
 
-$user->username = $_POST['username'];
-$user->token = $_POST['token'];
+$user->username = $_GET['username'];
+$user->token = $_GET['token'];
 
 if ($user->checkToken() == 1) {
     echo true;
