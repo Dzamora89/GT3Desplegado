@@ -138,7 +138,42 @@ $('#updateSelect').change(function () {
 })
 
 function deleteChampionship(championshipID) {
-    var myHeaders = new Headers();
+
+    $.ajax({
+            'url': './../backend/api/championship/Deletechampionship.php',
+            'data': {
+                'championshipID' : championshipID
+            },
+            'type': 'get',
+            'dataType': 'html',
+            'beforeSend':  () => {
+            }
+        })
+            .done( (response) => {
+                console.log(response)
+                let alert = document.createElement("div")
+                alert.innerHTML =
+                    `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Championship Deleted
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+                document.getElementById('principal').appendChild(alert)
+            })
+            .fail( function (code, status) {
+                let alert = document.createElement("div")
+                alert.innerHTML =
+                    `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Championship NOT DELETED
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+
+                document.getElementById('principal').appendChild(alert)
+            })
+            .always( function (xhr, status) {
+            });
+    /*   var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
 
         var raw = `{\r\n    \"championshipID\" : \"${championshipID}\"
@@ -176,6 +211,6 @@ function deleteChampionship(championshipID) {
             `;
 
             document.getElementById('principal').appendChild(alert)
-        });
+        });*/
 
 }

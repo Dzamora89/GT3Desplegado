@@ -1,3 +1,48 @@
+if (document.cookie.match(/username=([^;]+)/)) {
+    console.log(getCookieValue('username'))
+    console.log(getCookieValue('token'))
+    $.ajax({
+        'url': '../../backend/api/login/checkToken.php',
+        'data': {
+            'username' : getCookieValue('username'),
+            'token' : getCookieValue('token')
+        },
+        'type': 'get',
+        'dataType': 'html',
+        'beforeSend':  () => {
+        }
+    })
+        .done( (response) => {
+            console.log(response)
+            if (parseInt(response) === 1){
+                window.location.href = "../Admin/adminHome.html";
+            }
+        })
+        .fail( function (code, status) {
+        })
+        .always( function (xhr, status) {
+        });
+}
+
+
+
+// Obtiene el valor de la cookie
+function getCookieValue(cookieName) {
+    const cookieString = document.cookie;
+    const cookies = cookieString.split("; ");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const [name, value] = cookies[i].split("=");
+
+        if (name === cookieName) {
+            return decodeURIComponent(value);
+        }
+    }
+
+    return null;
+}
+
+
 $.ajax({
     'url': '../admin/navbar.html',
     'type': 'get',

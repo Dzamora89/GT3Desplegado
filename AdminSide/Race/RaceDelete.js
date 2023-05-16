@@ -137,12 +137,49 @@ $('#deleteSelect2').change(() => {
 })
 
 function deleteRace() {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "text/plain");
+/*    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "text/plain");*/
     let raceID = $('#deleteSelect2').val()
 
+$.ajax({
+        'url': '../../backend/api/race/Deleterace.php',
+        'data': {
+            'raceID' : raceID
+        },
+        'type': 'get',
+        'dataType': 'html',
+        'beforeSend':  () => {
+        }
+    })
+        .done( (response) => {
+            console.log(response)
+            let alert = document.createElement("div")
+            alert.innerHTML =
+                `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Race Deleted
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+            document.getElementById('principal').appendChild(alert)
+        })
+        .fail( function (code, status) {
+            let alert = document.createElement("div")
+            alert.innerHTML =
+                `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Race NOT DELETED
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
 
-    var raw = `{\r\n    \"raceID\" : \"${raceID}\"
+            document.getElementById('principal').appendChild(alert)
+        })
+        .always( function (xhr, status) {
+        });
+
+    $('#deleteSelect').empty()
+    getSelect();
+
+/*    var raw = `{\r\n    \"raceID\" : \"${raceID}\"
     \r\n}`;
 
     var requestOptions = {
@@ -177,7 +214,6 @@ function deleteRace() {
             `;
 
             document.getElementById('principal').appendChild(alert)
-        });
-    $('#deleteSelect').empty()
-    getSelect();
+        });*/
+
 }

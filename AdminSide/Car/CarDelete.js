@@ -139,14 +139,50 @@ $('#deleteSelect').change( () => {
 
 
 function deleteCar() {
+/*
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
+*/
 
 
     let carID = document.getElementById("deleteSelect").value
 
+    $.ajax({
+            'url': '../../backend/api/car/DeleteCar.php',
+            'data': {
+                'carID' : carID
+            },
+            'type': 'get',
+            'dataType': 'html',
+            'beforeSend':  () => {
+            }
+        })
+            .done( (response) => {
+                console.log(response)
+                let alert = document.createElement("div")
+                alert.innerHTML =
+                    `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Car Deleted
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+                document.getElementById('principal').appendChild(alert)
+            })
+            .fail( function (code, status) {
+                let alert = document.createElement("div")
+                alert.innerHTML =
+                    `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Car NOT DELETED
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
 
-    var raw = `{\r\n    \"carID\" : \"${carID}\"
+                document.getElementById('principal').appendChild(alert)
+            })
+            .always( function (xhr, status) {
+            });
+
+/*    var raw = `{\r\n    \"carID\" : \"${carID}\"
     \r\n}`;
 
     var requestOptions = {
@@ -154,9 +190,9 @@ function deleteCar() {
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
-    };
+    };*/
 
-    fetch("../../backend/api/car/DeleteCar.php", requestOptions)
+    /*fetch("../../backend/api/car/DeleteCar.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result)
@@ -182,5 +218,5 @@ function deleteCar() {
 
             document.getElementById('principal').appendChild(alert)
         });
-
+*/
 }
