@@ -21,12 +21,11 @@ $car = new Car($db);
 
 
 // Get de raw posted data
-$data = json_decode(file_get_contents("php://input"));
 
-$car->carClass = $data->carClass;
-$car->carNumber = $data->carNumber;
-$car->carTeamID = $data->carTeamID;
-$car->carManufacturer = $data->carManufacturer;
+$car->carClass = $_GET['carClass'];
+$car->carNumber = $_GET['carNumber'];
+$car->carTeamID = $_GET['carTeamID'];
+$car->carManufacturer = $_GET['carManufacturer'];
 
 //Create the car
 if ($car->createCar()) {

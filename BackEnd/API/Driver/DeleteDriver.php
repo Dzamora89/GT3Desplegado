@@ -21,8 +21,7 @@ $driver = new Driver($db);
 // Get de raw posted data
 
 
-$data = json_decode(file_get_contents("php://input"));
-$driver->driverID = $data->driverID;
+$driver->driverID = $_GET['driverID'];
 
 // Delete the driver
 

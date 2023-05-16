@@ -20,14 +20,13 @@ $team = new Team($db);
 
 
 // Get de raw posted data
-$data = json_decode(file_get_contents("php://input"));
 
-$team->teamName = $data->teamName;
-$team->teamOwner = $data->teamOwner;
-$team->teamCountry = $data->teamCountry;
-$team->teamTwitter = $data->teamTwitter;
-$team->teamWebsite = $data->teamWebsite;
-$team->teamCarBrand = $data->teamCarBrand;
+$team->teamName = $_GET['teamName'];
+$team->teamOwner = $_GET['teamOwner'];
+$team->teamCountry = $_GET['teamCountry'];
+$team->teamTwitter = $_GET['teamTwitter'];
+$team->teamWebsite = $_GET['teamWebsite'];
+$team->teamCarBrand = $_GET['teamCarBrand'];
 
 //Create the race
 if ($team->createTeam()) {

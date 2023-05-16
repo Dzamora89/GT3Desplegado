@@ -69,7 +69,7 @@ function createDriver() {
     let initialElo = $('#initialEloInput').val()
     let birthday = $('#birthDayInput').val()
 
-
+/*
 // TODO NOmbres de los ID y las Variables
     var raw = `{\r\n    \"driverFirstName\" : \"${firstName}\",
     \r\n    \"driverLastName\" : \"${lastName}\",
@@ -89,15 +89,56 @@ function createDriver() {
     var requestOptions = {
         method: 'get',
         headers: myHeaders,
-        body: raw,
+        data: raw,
         redirect: 'follow'
     };
+*/
+
+$.ajax({
+        'url': '../../backend/api/driver/CreateDriver.php',
+        'data': {
+            'driverFirstName' : firstName,
+            'driverLastName' : lastName,
+            'driverCountry' : country,
+            'driverDateOfBirth' : birthday,
+            'driverWebsite' : url,
+            'driverTwitter' : twitter,
+            'driverStatus' : status,
+            'driverELO' : initialElo,
+        },
+        'type': 'get',
+        'dataType': 'html',
+        'beforeSend':  () => {
+        }
+    })
+        .done( (response) => {
+            console.log(response)
+            let alert = document.createElement("div")
+            alert.innerHTML =
+                `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Driver Created
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+
+            document.getElementById('principal').appendChild(alert)        })
+        .fail( function (code, status) {
+            console.log('error', status)
+            let alert = document.createElement("div")
+            alert.innerHTML =
+                `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Driver Not Created
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+
+            document.getElementById('principal').appendChild(alert)
+        })
+        .always( function (xhr, status) {
+        });
 
 
-
-
-
-
+/*
     let result = fetch("../../backend/api/driver/CreateDriver.php", requestOptions)
         .then(response => response.text())
         .then(result => {
@@ -124,5 +165,5 @@ function createDriver() {
 
             document.getElementById('principal').appendChild(alert)
         });
-
+*/
 }

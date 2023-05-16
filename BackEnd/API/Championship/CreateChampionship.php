@@ -20,15 +20,14 @@ $championship = new Championship($db);
 
 
 // Get de raw posted data
-$data = json_decode(file_get_contents("php://input"));
 
-$championship->championshipName = $data->championshipName;
-$championship->championshipYoutube = $data->championshipYoutube;
-$championship->championshipFacebook = $data->championshipFacebook;
-$championship->championshipTwitter = $data->championshipTwitter;
-$championship->championshipWebsite = $data->championshipWebsite;
-$championship->championshipCountry = $data->championshipCountry;
-$championship->championshipSeason = $data->championshipSeason;
+$championship->championshipName = $_GET['championshipName'];
+$championship->championshipYoutube = $_GET['championshipYoutube'];
+$championship->championshipFacebook = $_GET['championshipFacebook'];
+$championship->championshipTwitter = $_GET['championshipTwitter'];
+$championship->championshipWebsite = $_GET['championshipWebsite'];
+$championship->championshipCountry = $_GET['championshipCountry'];
+$championship->championshipSeason = $_GET['championshipSeason'];
 //Create the championship
 if ($championship->createChampionship()) {
     echo json_encode(array('message' => 'championship Created'));

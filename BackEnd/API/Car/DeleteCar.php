@@ -18,8 +18,7 @@ $db = $database->connect();
 $car = new Car($db);
 
 
-$data = json_decode(file_get_contents("php://input"));
-$car->carID = $data->carID;
+$car->carID = $_GET['carID'];
 
 // Delete the Car
 

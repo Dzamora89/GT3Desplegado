@@ -18,8 +18,7 @@ $db = $database->connect();
 $championship = new Championship($db);
 
 
-$data = json_decode(file_get_contents("php://input"));
-$championship->championshipID = $data->championshipID;
+$championship->championshipID = $_GET['championshipID'];
 
 // Delete
 

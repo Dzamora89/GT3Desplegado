@@ -18,8 +18,7 @@ $db = $database->connect();
 $team = new Team($db);
 
 
-$data = json_decode(file_get_contents("php://input"));
-$team->teamID = $data->teamID;
+$team->teamID = $_GET['teamID'];
 // Delete
 
 if ($team->deleteTeam()) {

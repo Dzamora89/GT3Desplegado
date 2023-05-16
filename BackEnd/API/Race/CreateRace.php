@@ -20,12 +20,11 @@ $race = new Race($db);
 
 
 // Get de raw posted data
-$data = json_decode(file_get_contents("php://input"));
 
-$race->raceTrack = $data->raceTrack;
-$race->raceChampionshipID = $data->raceChampionshipID;
-$race->raceCountry = $data->raceCountry;
-$race->raceDateOfRace = $data->raceDateOfRace;
+$race->raceTrack = $_GET['raceTrack'];
+$race->raceChampionshipID = $_GET['raceChampionshipID'];
+$race->raceCountry = $_GET['raceCountry'];
+$race->raceDateOfRace = $_GET['raceDateOfRace'];
 
 //Create the race
 if ($race->createRace()) {

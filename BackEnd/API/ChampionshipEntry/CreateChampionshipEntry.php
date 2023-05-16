@@ -19,14 +19,13 @@ $db = $database->connect();
 $championshipEntry = new ChampionshipEntry($db);
 
 // Get de raw posted data
-$data = json_decode(file_get_contents("php://input"));
-$championshipEntry->championshipEntryChampionshipID = $data->championshipEntryChampionshipID;
-$championshipEntry->championshipEntryTotalPoints = $data->championshipEntryTotalPoints;
-$championshipEntry->championshipEntryPosition = $data->championshipEntryPosition;
-$championshipEntry->championshipEntryClass = $data->championshipEntryClass;
-$championshipEntry->championshipEntryCarID = $data->championshipEntryCarID;
-$championshipEntry->championshipEntryDriverID = $data->championshipEntryDriverID;
-$championshipEntry->championshipEntryTeamID = $data->championshipEntryTeamID;
+$championshipEntry->championshipEntryChampionshipID = $_GET['championshipEntryChampionshipID'];
+$championshipEntry->championshipEntryTotalPoints = $_GET['championshipEntryTotalPoints'];
+$championshipEntry->championshipEntryPosition = $_GET['championshipEntryPosition'];
+$championshipEntry->championshipEntryClass = $_GET['championshipEntryClass'];
+$championshipEntry->championshipEntryCarID = $_GET['championshipEntryCarID'];
+$championshipEntry->championshipEntryDriverID = $_GET['championshipEntryDriverID'];
+$championshipEntry->championshipEntryTeamID = $_GET['championshipEntryTeamID'];
 //Create
 if ($championshipEntry->createChampionshipEntry()) {
     echo json_encode(array('message' => 'championshipEntry Created'));

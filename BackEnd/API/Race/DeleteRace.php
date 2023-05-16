@@ -18,8 +18,7 @@ $db = $database->connect();
 $race = new Race($db);
 
 
-$data = json_decode(file_get_contents("php://input"));
-$race->raceID = $data->raceID;
+$race->raceID = $_GET['raceID'];
 // Delete
 
 if ($race->deleteRace()) {

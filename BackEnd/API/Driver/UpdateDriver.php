@@ -21,18 +21,17 @@ $driver = new Driver($db);
 // Get de raw posted data
 
 
-$data = json_decode(file_get_contents("php://input"));
 
-$driver->driverID = $data->driverID;
-$driver->driverFirstName = $data->driverFirstName;
-$driver->driverLastName = $data->driverLastName;
-$driver->driverCountry = $data->driverCountry;
-$driver->driverDateOfBirth = $data->driverDateOfBirth;
-$driver->driverWebsite = $data->driverWebsite;
-$driver->driverTwitter = $data->driverTwitter;
-$driver->driverStatus = $data->driverStatus;
-$driver->driverLicenseLevel = $data->driverLicenseLevel;
-$driver->driverELO = $data->driverELO;
+$driver->driverID = $_GET['driverID'];
+$driver->driverFirstName = $_GET['driverFirstName'];
+$driver->driverLastName = $_GET['driverLastName'];
+$driver->driverCountry = $_GET['driverCountry'];
+$driver->dateOfBirth = $_GET['driverDateOfBirth'];
+$driver->driverWebsite = $_GET['driverWebsite'];
+$driver->driverTwitter = $_GET['driverTwitter'];
+$driver->driverStatus = $_GET['driverStatus'];
+$driver->driverLicenseLevel = $_GET['driverLicenseLevel'];
+$driver->driverELO = $_GET['driverELO'];
 
 // Create the driver
 
