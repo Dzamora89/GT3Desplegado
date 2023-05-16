@@ -2,7 +2,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
+        'url': '../../backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
@@ -68,7 +68,7 @@ function championshipSelect() {
         method: 'GET', redirect: 'follow'
     };
 
-    fetch("http://localhost/gt3prostats/backend/api/championship/getallchampionship.php", requestOptions)
+    fetch("../../backend/api/championship/getallchampionship.php", requestOptions)
         .then(response => response.json())
         .then(data => data.sort((a,b) => {
             if (a.championshipSeason > b.championshipSeason) {
@@ -95,7 +95,7 @@ function teamSelect() {
     };
 
 
-    fetch("http://localhost/gt3prostats/backend/api/team/getallteam.php", requestOptions1)
+    fetch("../../backend/api/team/getallteam.php", requestOptions1)
         .then(response => response.json())
         .then(data => data.forEach((dato) => {
             let select = document.getElementById('championshipEntryTeamID')
@@ -114,7 +114,7 @@ $('#championshipEntryTeamID').on('change' ,() => {
         redirect: 'follow'
     };
 
-    let url = `http://localhost/gt3prostats/backend/api/Car/getCarByTeamID.php?carTeamID=${document.getElementById("championshipEntryTeamID").value}`
+    let url = `../../backend/api/Car/getCarByTeamID.php?carTeamID=${document.getElementById("championshipEntryTeamID").value}`
     fetch(url, requestOptions)
         .then(response => response.json())
         .then(data => {
@@ -136,7 +136,7 @@ $('#championshipEntryCarID').on('change', () => {
         redirect: 'follow'
     };
 
-    fetch("http://localhost/gt3prostats/backend/api/driver/getalldriver.php", requestOptions)
+    fetch("../..backend/api/driver/getalldriver.php", requestOptions)
         .then(response => response.json())
         .then(data => {
             data.forEach( (dato) => {
@@ -169,7 +169,7 @@ $('#championshipEntryCarID').on('change', () => {
         $(`#drivers`).append(`<select name="drivers[]" id="DriverSelect-${driverCount}" class="form-select selectDriver" aria-label="ChampionshipSelect">
         <option selected>Select the Driver</option>
       </select>`)
-        fetch("http://localhost/gt3prostats/backend/api/driver/getalldriver.php", requestOptions)
+        fetch("../../backend/api/driver/getalldriver.php", requestOptions)
             .then(response => response.json())
             .then(data =>{
                 data.forEach( (dato) => {
@@ -221,7 +221,7 @@ function createChampionshipEntry() {
 
 
 
-        let result = fetch("http://localhost/gt3prostats/backend/api/championshipEntry/CreatechampionshipEntry.php", requestOptions)
+        let result = fetch("../../backend/api/championshipEntry/CreatechampionshipEntry.php", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result)

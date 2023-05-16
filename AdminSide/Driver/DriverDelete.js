@@ -2,7 +2,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
+        'url': '../../backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
@@ -68,7 +68,7 @@ function getSelect() {
     };
 
 
-    fetch("http://localhost/gt3prostats/backend/api/driver/getalldriver.php", requestOptions1)
+    fetch("../../backend/api/driver/getalldriver.php", requestOptions1)
         .then(response => response.json())
         .then(data => data.sort((a,b) => {
             if (a.driverLastName > b.driverLastName){
@@ -96,7 +96,7 @@ $('#deleteSelect').change(() => {
         redirect: 'follow'
     };
 
-    let url = `http://localhost/gt3prostats/backend/api/Driver/getDriverByID.php?driverID=${document.getElementById("deleteSelect").value}`
+    let url = `../../backend/api/Driver/getDriverByID.php?driverID=${document.getElementById("deleteSelect").value}`
 
     fetch(url, requestOptions)
         .then(response => response.text())
@@ -164,7 +164,7 @@ function deleteDriver() {
         redirect: 'follow'
     };
 
-    fetch("http://localhost/gt3prostats/backend/api/driver/DeleteDriver.php", requestOptions)
+    fetch("../../backend/api/driver/DeleteDriver.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result)

@@ -2,7 +2,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
+        'url': '../../backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
@@ -60,7 +60,7 @@ $(document).on('change','#championshipSelect', (event) => {
         `)
 
         $.ajax({
-            'url': 'http://localhost/gt3prostats/backend/api/race/getraceofchampionshipid.php',
+            'url': '../../backend/api/race/getraceofchampionshipid.php',
             'data': {
                 'raceChampionshipID' : $('#championshipSelect').val()
             },
@@ -82,7 +82,7 @@ $(document).on('change','#championshipSelect', (event) => {
             });
     }else {
         $.ajax({
-            'url': 'http://localhost/gt3prostats/backend/api/race/getraceofchampionshipid.php',
+            'url': '../../backend/api/race/getraceofchampionshipid.php',
             'data': {
                 'raceChampionshipID' : $('#championshipSelect').val()
             },
@@ -134,7 +134,7 @@ $(document).on('change','#raceSelect', (event) => {
     `)
 
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/raceresult/getraceresultbyraceid.php',
+        'url': '../../backend/api/raceresult/getraceresultbyraceid.php',
         'data': {
             'raceID' : $('#raceSelect').val()
         },
@@ -219,7 +219,7 @@ $(document).on('click', '#guardar', (event) => {
     for (let i = 0; i < drivers.length; i++) {
         let eloTotal =  parseInt($('.driverELO').eq(i).val()) + parseInt($('.eloUpdated').eq(i).val())
         $.ajax({
-            'url': 'http://localhost/gt3prostats/backend/api/raceresult/updateraceresult.php',
+            'url': '../../backend/api/raceresult/updateraceresult.php',
             'data': {
                 'raceresultCarID' : $('.carID').eq(i).val(),
                 'raceresultRaceID' : $('#raceSelect').val(),
@@ -289,7 +289,7 @@ function getSelect() {
     `)
 
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/championship/getAllchampionship.php',
+        'url': '../../backend/api/championship/getAllchampionship.php',
         'type': 'get',
         'dataType': 'json',
         'beforeSend':  () => {

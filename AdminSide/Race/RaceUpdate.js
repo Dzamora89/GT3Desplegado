@@ -2,7 +2,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
+        'url': '../../backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
@@ -66,7 +66,7 @@ function getSelect() {
         method: 'GET',
         redirect: 'follow'
     };
-    fetch("http://localhost/gt3prostats/backend/api/championship/getallchampionship.php", requestOptions1)
+    fetch("../../backend/api/championship/getallchampionship.php", requestOptions1)
         .then(response => response.json())
         .then(data => data.forEach((dato) => {
             let select = document.getElementById('updateSelect')
@@ -87,7 +87,7 @@ $('#updateSelect').change(() => {
         redirect: 'follow'
     };
 
-    let url = `http://localhost/gt3prostats/backend/api/race/getraceofchampionshipid.php?raceChampionshipID=${document.getElementById("updateSelect").value}`
+    let url = `../../backend/api/race/getraceofchampionshipid.php?raceChampionshipID=${document.getElementById("updateSelect").value}`
 
     fetch(url, requestOptions1)
         .then(response => response.json())
@@ -110,7 +110,7 @@ $('#updateSelect2').change(() => {
         redirect: 'follow'
     };
 
-    let url = `http://localhost/gt3prostats/backend/api/Race/getRaceByID.php?raceID=${$('#updateSelect2').val()}`
+    let url = `../../backend/api/Race/getRaceByID.php?raceID=${$('#updateSelect2').val()}`
     $('#showRace').show();
     fetch(url, requestOptions2)
         .then(response => response.json())
@@ -162,7 +162,7 @@ function updateRace() {
         redirect: 'follow'
     };
 
-    fetch("http://localhost/gt3prostats/backend/api/Race/UpdateRace.php", requestOptions3)
+    fetch("../../backend/api/Race/UpdateRace.php", requestOptions3)
         .then(response => response.text())
         .then(result => {
             console.log(result)

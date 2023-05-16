@@ -2,7 +2,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': './backend/api/login/checkToken.php',
+        'url': '../../backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
@@ -66,7 +66,7 @@ var requestOptions = {
 };
 
 
-fetch("./backend/api/Car/getallCar.php", requestOptions)
+fetch("../../backend/api/Car/getallCar.php", requestOptions)
     .then(response => response.json())
     .then(data => data.forEach( (dato) => {
         let select = document.getElementById('deleteSelect')
@@ -87,7 +87,7 @@ $('#deleteSelect').change( () => {
         redirect: 'follow'
     };
 
-    let url = `./backend/api/Car/getCarByID.php?carID=${document.getElementById("deleteSelect").value}`
+    let url = `../../backend/api/Car/getCarByID.php?carID=${document.getElementById("deleteSelect").value}`
 
     fetch(url, requestOptions)
         .then(response => response.text())
@@ -120,7 +120,7 @@ $('#deleteSelect').change( () => {
     `;
             let team = jsonResult.teamID
 
-            fetch("./backend/api/Team/getAllTeam.php", requestOptions)
+            fetch("../../backend/api/Team/getAllTeam.php", requestOptions)
                 .then(response => response.json())
                 .then(data => data.forEach( (dato) => {
                     if (dato.teamID === team){
@@ -156,7 +156,7 @@ function deleteCar() {
         redirect: 'follow'
     };
 
-    fetch("./backend/api/car/DeleteCar.php", requestOptions)
+    fetch("../../backend/api/car/DeleteCar.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result)

@@ -2,7 +2,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
+        'url': '../../backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
@@ -94,7 +94,7 @@ function createChampionship(){
 
 
 
-    let result = fetch("http://localhost/gt3prostats/backend/api/championship/Createchampionship.php", requestOptions)
+    let result = fetch("../../backend/api/championship/Createchampionship.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             let alert = document.createElement("div")

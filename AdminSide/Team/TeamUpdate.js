@@ -2,7 +2,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
+        'url': '../../backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
@@ -67,7 +67,7 @@ function getSelect() {
     };
 
 
-    fetch("http://localhost/gt3prostats/backend/api/team/getallteam.php", requestOptions1)
+    fetch("../../backend/api/team/getallteam.php", requestOptions1)
         .then(response => response.json())
         .then(data => data.forEach((dato) => {
             let select = document.getElementById('updateSelect')
@@ -87,7 +87,7 @@ $('#updateSelect').change((() => {
         redirect: 'follow'
     };
 
-    let url = `http://localhost/gt3prostats/backend/api/team/getteamByID.php?teamID=${document.getElementById("updateSelect").value}`
+    let url = `../../backend/api/team/getteamByID.php?teamID=${document.getElementById("updateSelect").value}`
 
     fetch(url, requestOptions2)
         .then(response => response.json())
@@ -167,7 +167,7 @@ function updateTeam() {
         redirect: 'follow'
     };
 
-    fetch("http://localhost/gt3prostats/backend/api/Team/UpdateTeam.php", requestOptions3)
+    fetch("../../backend/api/Team/UpdateTeam.php", requestOptions3)
         .then(response => response.text())
         .then(result => {
             console.log(result)

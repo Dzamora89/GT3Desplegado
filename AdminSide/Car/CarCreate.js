@@ -2,7 +2,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': './backend/api/login/checkToken.php',
+        'url': '../../backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
@@ -63,7 +63,7 @@ $.ajax({
     .always( function (xhr, status) {
     });
 
-fetch("./backend/api/Team/getAllTeam.php", requestOptions)
+fetch("../../backend/api/Team/getAllTeam.php", requestOptions)
     .then(response => response.json())
     .then(data => data.sort((a ,b ) => {
         if (a.teamName > b.teamName){
@@ -109,7 +109,7 @@ function createCar(){
 
 
 
-    let result = fetch("./backend/api/Car/CreateCar.php", requestOptions)
+    let result = fetch("../../backend/api/Car/CreateCar.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             //Todo controlar errorres de PDO

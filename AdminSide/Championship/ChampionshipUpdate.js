@@ -2,7 +2,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
+        'url': '../../backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
@@ -64,7 +64,7 @@ var requestOptions = {
 };
 //Todo: Cambiar los Select al evento de Jquery para Change on Select
 
-fetch("http://localhost/gt3prostats/backend/api/championship/getallchampionship.php", requestOptions)
+fetch("../../backend/api/championship/getallchampionship.php", requestOptions)
     .then(response => response.json())
     .then(data => data.forEach((dato) => {
         let select = document.getElementById('updateSelect')
@@ -81,7 +81,7 @@ $('#updateSelect').change(function () {
         method: 'GET', redirect: 'follow'
     };
 
-    let url = `http://localhost/gt3prostats/backend/api/championship/getchampionshipByID.php?championshipID=${$('#updateSelect').val()}`
+    let url = `../../backend/api/championship/getchampionshipByID.php?championshipID=${$('#updateSelect').val()}`
 
     fetch(url, requestOptions)
         .then(response => response.json())
@@ -163,7 +163,7 @@ function updateChampionship() {
     };
 
 
-    fetch("http://localhost/gt3prostats/backend/api/championship/updatechampionship.php", requestOptions)
+    fetch("../../backend/api/championship/updatechampionship.php", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log(result)

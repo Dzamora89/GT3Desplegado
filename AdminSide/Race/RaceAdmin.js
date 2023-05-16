@@ -2,7 +2,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
+        'url': '../../backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
@@ -66,7 +66,7 @@ function fillTheTable() {
         redirect: 'follow'
     };
 //Todo Investiga que Carajos hay aqui
-    fetch("http://localhost/gt3prostats/backend/api/race/getallRace.php", requestOptions)
+    fetch("../../backend/api/race/getallRace.php", requestOptions)
         .then(response => response.json())
         .then(dataRaces => {
             console.log(dataRaces);

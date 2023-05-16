@@ -19,7 +19,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-            'url': './backend/api/login/checkToken.php',
+            'url': '../../backend/api/login/checkToken.php',
             'data': {
                 'username' : getCookieValue('username'),
                 'token' : getCookieValue('token')
@@ -68,7 +68,7 @@ function getCookieValue(cookieName) {
 let fecha = new Date()
 $('#date').text(`${fecha.getFullYear()}`)
 $.ajax({
-    'url': './backend/api/Race/getAllRace.php',
+    'url': '../../backend/api/Race/getAllRace.php',
     'data': {
     },
     'type': 'get',

@@ -2,7 +2,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
     console.log(getCookieValue('username'))
     console.log(getCookieValue('token'))
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/login/checkToken.php',
+        'url': '../../backend/api/login/checkToken.php',
         'data': {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
@@ -63,7 +63,7 @@ function championshipSelect() {
         method: 'GET', redirect: 'follow'
     };
 
-    fetch("http://localhost/gt3prostats/backend/api/championship/getallchampionship.php", requestOptions)
+    fetch("../../backend/api/championship/getallchampionship.php", requestOptions)
         .then(response => response.json())
         .then(data => data.sort((a,b) => {
             if (a.championshipSeason > b.championshipSeason) {
@@ -88,7 +88,7 @@ $(document).ready(championshipSelect())
 $(document).on('change', '#championshipEntryChampionshipID', loadEntries)
 function loadEntries() {
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/championshipentry/getchampionshipentrybychampionshipID.php',
+        'url': '../../backend/api/championshipentry/getchampionshipentrybychampionshipID.php',
         'data': {
             'ChampionshipID' : $('#championshipEntryChampionshipID').val()
         },
@@ -135,7 +135,7 @@ function loadEntries() {
 
 $(document).on('click','.btn-danger', (event) => {
     $.ajax({
-            'url': 'http://localhost/gt3prostats/backend/api/championshipentry/deletechampionshipEntry.php',
+            'url': '../../backend/api/championshipentry/deletechampionshipEntry.php',
             'data': {
                 'championshipEntryID' : $(event.target).val()
             },
