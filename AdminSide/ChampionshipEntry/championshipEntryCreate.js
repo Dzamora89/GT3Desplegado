@@ -56,7 +56,7 @@ $.ajax({
     }
 })
     .done( (response) => {
-        $('nav').html(response);
+        $('.navbar').html(response);
     })
     .fail( function (code, status) {
     })

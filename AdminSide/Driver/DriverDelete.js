@@ -53,7 +53,7 @@ $.ajax({
     }
 })
     .done( (response) => {
-        $('nav').html(response);
+        $('.navbar').html(response);
     })
     .fail( function (code, status) {
     })
@@ -174,6 +174,8 @@ function deleteDriver() {/*
                 document.getElementById('principal').appendChild(alert)
             })
             .fail( function (code, status) {
+                console.log(code)
+                console.log(status)
                 let alert = document.createElement("div")
                 alert.innerHTML =
                     `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">

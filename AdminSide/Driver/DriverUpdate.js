@@ -53,7 +53,7 @@ $.ajax({
     }
 })
     .done( (response) => {
-        $('nav').html(response);
+        $('.navbar').html(response);
     })
     .fail( function (code, status) {
     })
@@ -127,11 +127,11 @@ $('#updateSelect').change((() => {
         </div>
         <div class="input-group mb-3 w-25">
             <span class="input-group-text" id="DriverStatus">Driver Status</span>
-            <input id="driverStatusInput" type="text" class="form-control" placeholder="Active" aria-label="DriverStatus" value="Active" aria-describedby="Driver-Status" value="${jsonResult.driverStatus}">
+            <input id="driverStatusInput" type="text" class="form-control" placeholder="Active" aria-label="DriverStatus"  aria-describedby="Driver-Status" value="${jsonResult.driverStatus}">
         </div>
         <div class="input-group mb-3 w-25">
             <span class="input-group-text" id="DriverELo">Initial Elo Rating</span>
-            <input id="initialEloInput" type="number" class="form-control" placeholder="Elo Rating" value="1500" aria-label="LastName" aria-describedby="Elo-Rating" value="${jsonResult.driverElo}">
+            <input id="initialEloInput" type="number" class="form-control" placeholder="Elo Rating"  aria-label="LastName" aria-describedby="Elo-Rating" value="${jsonResult.driverElo}">
         </div>
         <div class="input-group mb-3 w-25">
             <span class="input-group-text" id="DriverbirthDate">Driver birth date</span>
