@@ -187,6 +187,7 @@ $('#championshipEntryCarID').on('change', () => {
 
 function createChampionshipEntry() {
 
+
     let championshipEntryChampionshipID = $('#championshipEntryChampionshipID').val()
     let championshipEntryTotalPoints = 0
     let championshipEntryPosition = 1
@@ -198,6 +199,33 @@ function createChampionshipEntry() {
     console.log($('#championshipEntryCreateForm').serialize())
     $('.selectDriver').each((index, element) => {
         let championshipEntryDriverID = $(element).val()
+
+        $.ajax({
+                'url': '../../backend/api/championshipEntry/CreatechampionshipEntry.php',
+                'data': {
+                    'championshipEntryChampionshipID' : championshipEntryChampionshipID,
+                    'championshipEntryTotalPoints' : championshipEntryTotalPoints,
+                    'championshipEntryPosition' : championshipEntryPosition,
+                    'championshipEntryClass' : championshipEntryClass,
+                    'championshipEntryCarID' : championshipEntryCarID,
+                    'championshipEntryTeamID' : championshipEntryTeamID,
+                    'championshipEntryDriverID' : championshipEntryDriverID
+                },
+                'type': 'get',
+                'dataType': 'html',
+                'beforeSend':  () => {
+                }
+            })
+                .done( (response) => {
+                    console.log(response)
+                })
+                .fail( function (code, status) {
+                })
+                .always( function (xhr, status) {
+                });
+
+
+        /*
        var raw = `{\r\n    \"championshipEntryChampionshipID\" : \"${championshipEntryChampionshipID}\",
          \r\n    \"championshipEntryTotalPoints\" : \"${championshipEntryTotalPoints}\",
          \r\n    \"championshipEntryPosition\" : \"${championshipEntryPosition}\",
@@ -247,15 +275,10 @@ function createChampionshipEntry() {
 
                 document.getElementById('principal').appendChild(alert)
             });
-
+    */
     })
 
 
-/*
-
-
-
- */
 }
 
 

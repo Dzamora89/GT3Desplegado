@@ -88,6 +88,50 @@ function createRace(){
     let country = $('#country').val()
     let championshipID = $('#championshipSelect').val()
 
+    $.ajax({
+            'url': 'URL',
+            'data': {
+                'track' : track,
+                'dateOfRace' : dateOfRace,
+                'country' : country,
+                'championshipID' : championshipID
+            },
+            'type': 'get',
+            'dataType': 'html',
+            'beforeSend':  () => {
+            }
+        })
+            .done( (response) => {
+                console.log(response)
+                let alert = document.createElement("div")
+                alert.innerHTML =
+                    `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Race Created
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+
+                document.getElementById('principal').appendChild(alert)
+            })
+            .fail( function (code, status) {
+                console.log('error', status)
+                let alert = document.createElement("div")
+                alert.innerHTML =
+                    `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Race Not Created
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+
+                document.getElementById('principal').appendChild(alert)
+            })
+            .always( function (xhr, status) {
+            });
+
+
+    /*
+
+
 
 
     var raw = `{\r\n    \"raceTrack\" : \"${track}\",
@@ -139,4 +183,6 @@ function createRace(){
             document.getElementById('principal').appendChild(alert)
         });
 
+
+     */
 }

@@ -84,9 +84,47 @@ function createCar(){
     let carTeamID = $('#teamName').val()
     let carNumber = $('#carNumber').val()
     let carClass = $('#className').val()
+$.ajax({
+        'url': 'URL',
+        'data': {
+            'carManufacturer' : carManufacturer,
+            'carTeamID' : carTeamID,
+            'carNumber' : carNumber,
+            'carClass' : carClass
 
+        },
+        'type': 'get',
+        'dataType': 'html',
+        'beforeSend':  () => {
+        }
+    })
+        .done( (response) => {
+            console.log(response)
+            let alert = document.createElement("div")
+            alert.innerHTML =
+                `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Car Created
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
 
+            document.getElementById('principal').appendChild(alert)
+        })
+        .fail( function (code, status) {
+            let alert = document.createElement("div")
+            alert.innerHTML =
+                `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Car Not Created
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
 
+            document.getElementById('principal').appendChild(alert)
+        })
+        .always( function (xhr, status) {
+        });
+
+/*
     var raw = `{\r\n    \"carManufacturer\" : \"${carManufacturer}\",
     \r\n    \"carTeamID\" : \"${carTeamID}\",
     \r\n    \"carNumber\" : \"${carNumber}\",
@@ -137,4 +175,5 @@ function createCar(){
             document.getElementById('principal').appendChild(alert)
         });
 
+ */
 }

@@ -146,6 +146,48 @@ function updateChampionship() {
     let championshipTwitter = $('#championshipTwitter').val()
     let championshipYoutube = $('#championshipYoutube').val()
 
+    $.ajax({
+            'url': '../../backend/api/championship/updatechampionship.php',
+            'data': {
+                'championshipID' : championshipID,
+                'championshipName' : championshipName,
+                'championshipCountry' : championshipCountry,
+                'championshipSeason' : championshipSeason,
+                'championshipWebsite' : championshipWebsite,
+                'championshipFacebook' : championshipFacebook,
+                'championshipTwitter' : championshipTwitter,
+                'championshipYoutube' : championshipYoutube
+            },
+            'type': 'get',
+            'dataType': 'html',
+            'beforeSend':  () => {
+            }
+        })
+            .done( (response) => {
+                console.log(response)
+                let alert = document.createElement("div")
+                alert.innerHTML = `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Championship Updated
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+
+                document.getElementById('principal').appendChild(alert)
+            })
+            .fail( function (code, status) {
+                console.log('error', status)
+                let alert = document.createElement("div")
+                alert.innerHTML = `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Championship Not Updated
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+
+                document.getElementById('principal').appendChild(alert)
+            })
+            .always( function (xhr, status) {
+            });
+    /*
     const raw = `{ "championshipID" : "${championshipID}",
     "championshipName" : "${championshipName}",
     "championshipCountry" : "${championshipCountry}",
@@ -188,4 +230,6 @@ function updateChampionship() {
             document.getElementById('principal').appendChild(alert)
         });
 
+
+     */
 }

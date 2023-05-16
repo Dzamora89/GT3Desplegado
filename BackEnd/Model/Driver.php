@@ -31,8 +31,8 @@ class Driver
         //Create Query
         $query = 'SELECT * 
                   FROM driver
-                  join championshipentry c on driver.driverID = c.championshipEntryDriverID
-                  join car c2 on c2.carID = c.championshipEntryCarID
+                  left join championshipentry c on driver.driverID = c.championshipEntryDriverID
+                  left join car c2 on c2.carID = c.championshipEntryCarID
                   ORDER BY driverELO desc ';
 
         // Prepared Statement
@@ -121,7 +121,7 @@ class Driver
         $this->driverFirstName = htmlspecialchars(strip_tags($this->driverFirstName));
         $this->driverLastName = htmlspecialchars(strip_tags($this->driverLastName));
         $this->driverCountry = htmlspecialchars(strip_tags($this->driverCountry));
-        $this->driverDateOfBirth = htmlspecialchars(strip_tags($this->driverDateOfBirth));
+        $this->dateOfBirth = htmlspecialchars(strip_tags($this->driverDateOfBirth));
         $this->driverWebsite = htmlspecialchars(strip_tags($this->driverWebsite));
         $this->driverTwitter = htmlspecialchars(strip_tags($this->driverTwitter));
         $this->driverStatus = htmlspecialchars(strip_tags($this->driverStatus));
@@ -156,10 +156,10 @@ class Driver
     public function getDriverByID(): void
     {
         $query = 'SELECT * 
-                  FROM  driver 
-                    join championshipentry c on driver.driverID = c.championshipEntryDriverID
-                    join car c2 on c2.carID = c.championshipEntryCarID
-                  WHERE driverID = :driverID';
+                FROM  driver 
+                    left join championshipentry c on driver.driverID = c.championshipEntryDriverID
+                    left join car c2 on c2.carID = c.championshipEntryCarID
+                WHERE driverID = :driverID';
         //Prepare Statement
 
         $stmt = $this->conn->prepare($query);
@@ -177,7 +177,7 @@ class Driver
         $this->driverFirstName = $row['driverFirstName'];
         $this->driverLastName = $row['driverLastName'];
         $this->driverCountry = $row['driverCountry'];
-        $this->driverDateOfBirth = $row['driverDateOfBirth'];
+        $this->dateOfBirth = $row['driverDateOfBirth'];
         $this->driverWebsite = $row['driverWebsite'];
         $this->driverTwitter = $row['driverTwitter'];
         $this->driverStatus = $row['driverStatus'];

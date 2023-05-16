@@ -137,16 +137,62 @@ $('#updateSelect2').change(() => {
 })
 
 function updateRace() {
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "text/plain");
-
-
     let raceID = $('#updateSelect2').val()
     let track = $('#track').val()
     let dateOfRace = $('#dateOfRace').val()
     let country = $('#country').val()
     let championshipID = $('#updateSelect').val()
+
+    $.ajax({
+            'url': '../../backend/api/Race/UpdateRace.php',
+            'data': {
+                'raceID' : raceID,
+                'track' : track,
+                'country' : country,
+                'dateOfRace' : dateOfRace,
+                'championshipID' : championshipID
+            },
+            'type': 'get',
+            'dataType': 'html',
+            'beforeSend':  () => {
+            }
+        })
+            .done( (response) => {
+                console.log(response)
+                let alert = document.createElement("div")
+                alert.innerHTML =
+                    `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Race Updated
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+
+                document.getElementById('principal').appendChild(alert)
+            })
+            .fail( function (code, status) {
+                let alert = document.createElement("div")
+                alert.innerHTML =
+                    `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Race NOT UPDATED
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+
+                document.getElementById('principal').appendChild(alert)
+            })
+            .always( function (xhr, status) {
+            });
+
+    $('#showRace').hide()
+    getSelect()
+
+    /*
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "text/plain");
+
+
+
 
 
     var raw = `{\r\n    \"raceID\" : \"${raceID}\",
@@ -187,6 +233,6 @@ function updateRace() {
 
             document.getElementById('principal').appendChild(alert)
         });
-    $('#showRace').hide()
-    getSelect()
+
+     */
 }

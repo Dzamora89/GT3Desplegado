@@ -153,10 +153,6 @@ $('#updateSelect').change((() => {
 
 
 function updateDriver() {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "text/plain");
-
-
     let driverID = $('#updateSelect').val()
     let firstName = $('#firstNameInput').val()
     let lastName = $('#lastNameInput').val()
@@ -167,6 +163,53 @@ function updateDriver() {
     let initialElo = $('#initialEloInput').val()
     let birthday = $('#birthDayInput').val()
 
+    $.ajax({
+        'url': '../../backend/api/driver/UpdateDriver.php',
+        'data': {
+            'driverID' : driverID,
+            'driverFirstName' :firstName,
+            'driverLastName' : lastName,
+            'driverCountry' : country,
+            'driverDateOfBirth' : birthday,
+            'driverWebsite' : url,
+            'driverTwitter' : twitter,
+            'driverLicenseLevel' : valor,
+            'driverStatus' : status,
+            'driverELO' : initialElo,
+        },
+        'type': 'get',
+        'dataType': 'html',
+        'beforeSend':  () => {
+        }
+    })
+        .done( (response) => {
+            let alert = document.createElement("div")
+            alert.innerHTML =
+                `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Driver Updated
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+
+            document.getElementById('principal').appendChild(alert)        })
+        .fail( function (code, status) {
+            console.log(status)
+
+            let alert = document.createElement("div")
+            alert.innerHTML =
+                `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Driver NOT UPDATED
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `;
+
+            document.getElementById('principal').appendChild(alert)
+        })
+        .always( function (xhr, status) {
+        });
+    /*
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "text/plain");
 
     var raw = `{\r\n    \"driverID\" : \"${driverID}\",
     \r\n    \"driverFirstName\" : \"${firstName}\",
@@ -213,4 +256,7 @@ function updateDriver() {
 
             document.getElementById('principal').appendChild(alert)
         });
+
+     */
+
 }
