@@ -7,7 +7,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'post',
+        'type': 'get',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -98,7 +98,7 @@ function createCar(){
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
     var requestOptions = {
-        method: 'POST',
+        method: 'get',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'

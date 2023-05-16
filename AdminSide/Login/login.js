@@ -1,6 +1,6 @@
 $.ajax({
     'url': '../admin/navbar.html',
-    'type': 'post',
+    'type': 'get',
     'dataType': 'html',
     'beforeSend':  () => {
     }
@@ -15,12 +15,12 @@ $.ajax({
 
 $(document).on('click','#login-btn', event => {
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/login/login.php',
+        'url': '../../Backend/API/Login/Login.php',
         'data': {
             'username' : $('#username').val(),
             'password' : $('#password').val()
         },
-        'type': 'post',
+        'type': 'get',
         'dataType': 'html',
         'beforeSend':  () => {
         }

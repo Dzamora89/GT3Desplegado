@@ -24,7 +24,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
                 'username' : getCookieValue('username'),
                 'token' : getCookieValue('token')
             },
-            'type': 'post',
+            'type': 'get',
             'dataType': 'html',
             'beforeSend':  () => {
             }
@@ -71,7 +71,7 @@ $.ajax({
     'url': './backend/api/Race/getAllRace.php',
     'data': {
     },
-    'type': 'post',
+    'type': 'get',
     'dataType': 'json',
     'beforeSend':  () => {
     }

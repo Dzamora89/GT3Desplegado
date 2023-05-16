@@ -7,7 +7,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'post',
+        'type': 'get',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -135,7 +135,7 @@ $(document).on('change','#raceSelect', (event) => {
             'data': {
                 'ChampionshipID' : $('#championshipSelect').val()
             },
-            'type': 'post',
+            'type': 'get',
             'dataType': 'json',
             'beforeSend':  () => {
             }
@@ -222,7 +222,7 @@ $(document).on('click', '#guardar', (event) => {
                     'raceresultPosition' :  $('.posiciones').eq(i).val(),
                     'championshipID' : $('#championshipSelect').val()
                 },
-                'type': 'post',
+                'type': 'get',
                 'dataType': 'html',
                 'beforeSend':  () => {
                 }
@@ -289,7 +289,7 @@ function getSelect() {
 
     $.ajax({
             'url': 'http://localhost/gt3prostats/backend/api/championship/getAllchampionship.php',
-            'type': 'post',
+            'type': 'get',
             'dataType': 'json',
             'beforeSend':  () => {
             }
@@ -310,7 +310,7 @@ function getSelect() {
 function cargarNavBar(){
     $.ajax({
         'url': '../Admin/Navbar.html',
-        'type': 'post',
+        'type': 'get',
         'dataType': 'html',
         'beforeSend':  () => {
         }

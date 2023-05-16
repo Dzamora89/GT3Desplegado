@@ -7,7 +7,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'post',
+        'type': 'get',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -47,7 +47,7 @@ cargarNavBar()
 function cargarNavBar(){
     $.ajax({
         'url': '../Admin/Navbar.html',
-        'type': 'post',
+        'type': 'get',
         'dataType': 'html',
         'beforeSend':  () => {
         }

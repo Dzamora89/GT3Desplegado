@@ -7,7 +7,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'post',
+        'type': 'get',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -150,7 +150,7 @@ function deleteCar() {
     \r\n}`;
 
     var requestOptions = {
-        method: 'POST',
+        method: 'get',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'

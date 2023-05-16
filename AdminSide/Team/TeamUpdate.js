@@ -7,7 +7,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'post',
+        'type': 'get',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -47,7 +47,7 @@ $( document ).ready(getSelect() )
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'post',
+    'type': 'get',
     'dataType': 'html',
     'beforeSend':  () => {
     }
@@ -161,7 +161,7 @@ function updateTeam() {
     \r\n    \"teamCarBrand\" : \"${teamCarBrand}\"}`;
 
     var requestOptions3 = {
-        method: 'POST',
+        method: 'get',
         headers: myHeaders,
         body: raw,
         redirect: 'follow'

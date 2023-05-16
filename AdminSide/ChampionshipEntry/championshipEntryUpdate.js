@@ -7,7 +7,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'post',
+        'type': 'get',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -46,7 +46,7 @@ function getCookieValue(cookieName) {
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'post',
+    'type': 'get',
     'dataType': 'html',
     'beforeSend':  () => {
     }
@@ -92,14 +92,14 @@ function loadEntries() {
         'data': {
             'ChampionshipID' : $('#championshipEntryChampionshipID').val()
         },
-        'type': 'post',
+        'type': 'get',
         'dataType': 'json',
         'beforeSend':  () => {
         }
     })
         .done( function (response) {
             $('#EntriesList').html('')
-            if (response.message != 'No post found'){
+            if (response.message != 'No get found'){
                 $('#EntriesList').html(`
                 <table class="table table-striped mt-5 bg-light">
                     <thead>
@@ -148,7 +148,7 @@ $(document).on('click','.btn-dark', (event) => {
             'championshipEntryID' : $(event.target).val(),
             'championshipEntryTotalPoints' : $('#points').val()
         },
-        'type': 'post',
+        'type': 'get',
         'dataType': 'html',
         'beforeSend':  () => {
         }

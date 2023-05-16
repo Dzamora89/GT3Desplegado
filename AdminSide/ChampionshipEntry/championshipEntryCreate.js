@@ -7,7 +7,7 @@ if (document.cookie.match(/username=([^;]+)/)) {
             'username' : getCookieValue('username'),
             'token' : getCookieValue('token')
         },
-        'type': 'post',
+        'type': 'get',
         'dataType': 'html',
         'beforeSend':  () => {
         }
@@ -50,7 +50,7 @@ $(document).ready(teamSelect())
 //Cargar el NavBar
 $.ajax({
     'url': '../Admin/Navbar.html',
-    'type': 'post',
+    'type': 'get',
     'dataType': 'html',
     'beforeSend':  () => {
     }
@@ -210,7 +210,7 @@ function createChampionshipEntry() {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         var requestOptions = {
-            method: 'POST',
+            method: 'get',
             headers: myHeaders,
             body: raw,
             redirect: 'follow'

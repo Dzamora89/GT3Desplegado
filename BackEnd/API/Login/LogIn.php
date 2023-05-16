@@ -13,8 +13,8 @@ $db = $database->connect();
 
 $user = new User($db);
 
-$user->username = $_POST['username'];
-$user->password = $_POST['password'];
+$user->username = $_GET['username'];
+$user->password = $_GET['password'];
 
 if ($user->checkCredentials() == 1) {
     echo $user->updateTheToken();
