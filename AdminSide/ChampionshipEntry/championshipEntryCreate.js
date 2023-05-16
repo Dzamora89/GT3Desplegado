@@ -218,8 +218,23 @@ function createChampionshipEntry() {
             })
                 .done( (response) => {
                     console.log(response)
+                    let alert = document.createElement("div")
+                    alert.innerHTML =
+                        `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Championship Created
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `
+
                 })
                 .fail( function (code, status) {
+                    let alert = document.createElement("div")
+                    alert.innerHTML =
+                        `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                Championship Not Created
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            `
                 })
                 .always( function (xhr, status) {
                 });

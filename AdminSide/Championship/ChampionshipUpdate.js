@@ -166,7 +166,7 @@ function updateChampionship() {
             .done( (response) => {
                 console.log(response)
                 let alert = document.createElement("div")
-                alert.innerHTML = `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                alert.innerHTML = `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
                 Championship Updated
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -177,7 +177,7 @@ function updateChampionship() {
             .fail( function (code, status) {
                 console.log('error', status)
                 let alert = document.createElement("div")
-                alert.innerHTML = `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                alert.innerHTML = `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
                 Championship Not Updated
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

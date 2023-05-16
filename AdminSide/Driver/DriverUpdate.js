@@ -185,7 +185,7 @@ function updateDriver() {
         .done( (response) => {
             let alert = document.createElement("div")
             alert.innerHTML =
-                `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
                 Driver Updated
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -197,7 +197,7 @@ function updateDriver() {
 
             let alert = document.createElement("div")
             alert.innerHTML =
-                `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
                 Driver NOT UPDATED
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

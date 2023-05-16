@@ -86,7 +86,7 @@ function createTeam() {
                 console.log(response)
                 let alert = document.createElement("div")
                 alert.innerHTML =
-                    `<div class="alert alert-success alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                    `<div class="alert alert-success alert-dismissible fade show  m-auto mt-3" role="alert">
                 Team Created
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -97,7 +97,7 @@ function createTeam() {
             .fail( function (code, status) {
                 let alert = document.createElement("div")
                 alert.innerHTML =
-                    `<div class="alert alert-danger alert-dismissible fade show w-50 m-auto mt-3" role="alert">
+                    `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">
                 Team Not Created
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
