@@ -19,6 +19,7 @@ class Driver
     public $driverLicenseLevel;
     public $driverELO;
     public $carManufacturer;
+    public $driverImgUrl;
 
     // Constructor with DB
     public function __construct($db)
@@ -56,7 +57,8 @@ class Driver
         driverTwitter = :driverTwitter, 
         driverStatus = :driverStatus,
         driverLicenseLevel = :driverLicenseLevel,
-        driverELO = :driverELO';
+        driverELO = :driverELO,
+        driverImgUrl = :driverImgUrl';
 
         //Statment
         $stmt = $this->conn->prepare($query);
@@ -72,6 +74,8 @@ class Driver
         $this->driverStatus = htmlspecialchars(strip_tags($this->driverStatus));
         $this->driverLicenseLevel = htmlspecialchars(strip_tags($this->driverLicenseLevel));
         $this->driverELO = htmlspecialchars(strip_tags($this->driverELO));
+        $this->driverImgUrl = htmlspecialchars(strip_tags($this->driverImgUrl));
+
 
 
         //Bind the dada
@@ -84,6 +88,8 @@ class Driver
         $stmt->bindParam(':driverStatus', $this->driverStatus);
         $stmt->bindParam(':driverLicenseLevel', $this->driverLicenseLevel);
         $stmt->bindParam(':driverELO', $this->driverELO);
+        $stmt->bindParam(':driverImgUrl', $this->driverImgUrl);
+
 
 
         //Execute Query
@@ -109,7 +115,8 @@ class Driver
         driverTwitter = :driverTwitter, 
         driverStatus = :driverStatus,
         driverLicenseLevel = :driverLicenseLevel,
-        driverELO = :driverELO
+        driverELO = :driverELO,
+        driverImgUrl = :driverImgUrl
         WHERE
         driverID = :driverID';
 
@@ -128,6 +135,8 @@ class Driver
         $this->driverLicenseLevel = htmlspecialchars(strip_tags($this->driverLicenseLevel));
         $this->driverELO = htmlspecialchars(strip_tags($this->driverELO));
         $this->driverID = htmlspecialchars(strip_tags($this->driverID));
+        $this->driverImgUrl = htmlspecialchars(strip_tags($this->driverImgUrl));
+
 
         //Bind the dada
         $stmt->bindParam(':driverFirstName', $this->driverFirstName);
@@ -140,6 +149,7 @@ class Driver
         $stmt->bindParam(':driverLicenseLevel', $this->driverLicenseLevel);
         $stmt->bindParam(':driverELO', $this->driverELO);
         $stmt->bindParam(':driverID', $this->driverID);
+        $stmt->bindParam(':driverImgUrl', $this->driverImgUrl);
 
         //Execute Query
 
@@ -184,6 +194,8 @@ class Driver
         $this->driverLicenseLevel = $row['driverLicenseLevel'];
         $this->driverELO = $row['driverELO'];
         $this->carManufacturer = $row['carManufacturer'];
+        $this->driverImgUrl = $row['driverImgUrl'];
+
     }
 
 

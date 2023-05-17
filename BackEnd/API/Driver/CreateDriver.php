@@ -33,6 +33,8 @@ $driver->driverTwitter = $_GET['driverTwitter'];
 $driver->driverStatus = $_GET['driverStatus'];
 $driver->driverLicenseLevel = $_GET['driverLicenseLevel'];
 $driver->driverELO = $_GET['driverELO'];
+$driver->driverImgUrl = $_GET['driverImgUrl'];
+
 
 // Create the driver
 

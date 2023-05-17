@@ -122,6 +122,10 @@ $('#deleteSelect').change(() => {
             <input readonly id="urlInput" type="url" class="form-control" placeholder="Driver Website" aria-label="DriverWebsite" aria-describedby="Driver-Website" value="${jsonResult.driverWebsite}">
         </div>
         <div class="input-group mb-3 w-50">
+            <span class="input-group-text" id="driverImgUrl">Driver Image URL</span>
+            <input readonly id="driverImgUrl" type="url" class="form-control" placeholder="driverImgUrl" aria-label="DriverWebsite" aria-describedby="Driver-Website" value="${jsonResult.driverImgUrl}">
+        </div>
+        <div class="input-group mb-3 w-50">
             <span class="input-group-text" id="Twitter">Twitter @</span>
             <input readonly id="twitterInput" type="text" class="form-control" placeholder="Twitter Handle" aria-label="Twitter" aria-describedby="Twitter" value="${jsonResult.driverTwitter}">
         </div>

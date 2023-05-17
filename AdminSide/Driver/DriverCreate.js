@@ -68,6 +68,7 @@ function createDriver() {
     let status = $('#driverStatusInput').val()
     let initialElo = $('#initialEloInput').val()
     let birthday = $('#birthDayInput').val()
+    let driverImgUrl = $('#driverImgUrl').val()
 
 /*
 // TODO NOmbres de los ID y las Variables
@@ -105,6 +106,7 @@ $.ajax({
             'driverTwitter' : twitter,
             'driverStatus' : status,
             'driverELO' : initialElo,
+            'driverImgUrl' : driverImgUrl
         },
         'type': 'get',
         'dataType': 'html',

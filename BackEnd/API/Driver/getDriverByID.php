@@ -36,6 +36,7 @@ $driver_Array = array(
     'driverLicenseLevel' => $driver->driverLicenseLevel,
     'driverElo' => $driver->driverELO,
     'carManufacturer' => $driver->carManufacturer,
+    'driverImgUrl' => $driver->driverImgUrl,
 );
 
 //Make Json

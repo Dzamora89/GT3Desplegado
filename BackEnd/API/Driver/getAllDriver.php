@@ -39,7 +39,8 @@ if ($rowNumber > 0) {
             'driverStatus' => $driverStatus,
             'driverLicenseLevel' => $driverLicenseLevel,
             'driverELO' => $driverELO,
-            'carManufacturer' => $carManufacturer
+            'carManufacturer' => $carManufacturer,
+            'driverImgUrl' => $driverImgUrl
         );
         // Push Data This work the same as array_push() https://www.php.net/manual/es/function.array-push.php
 //        $post_Array['Data'][] = $driver_item;
