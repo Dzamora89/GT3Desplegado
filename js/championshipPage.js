@@ -30,6 +30,9 @@ $.ajax({
     })
         .done( (response) => {
             $('#championshipName').html(`${response[0].championshipName}`)
+            response.sort( (a,b) => {
+                a.championshipEntryTotalPoints  - b.championshipEntryTotalPoints
+            })
             response.forEach( e => {
                 $('#championshipTable tbody').append(
                     `
@@ -117,8 +120,8 @@ $(document).on('change', '#raceSelect' , (e) => {
                         <td>${e.driverFirstName} ${e.driverLastName}</td>
                         <td>${e.carManufacturer}</td>
                         <td>${e.carNumber}</td>
-                        <td>${e.raceResultLaps}</td>
-                        <td>${e.raceResultGap}</td>
+                        <td>${e.raceResultLaps} Laps</td>
+                        <td>${e.raceResultGap} s</td>
                         <td>${e.raceResultPointsScored}</td>
                         <td>${e.driverELO}</td>
                         <td>${e.raceResultEloChanged}</td>

@@ -136,9 +136,10 @@ $('#championshipEntryCarID').on('change', () => {
         redirect: 'follow'
     };
 
-    fetch("../..backend/api/driver/getalldriver.php", requestOptions)
+    fetch("../../backend/api/driver/getalldriver.php", requestOptions)
         .then(response => response.json())
         .then(data => {
+            data.sort( (a,b) => a.driverLastName.localeCompare(b.driverLastName))
             data.forEach( (dato) => {
                     let select = document.getElementById(`DriverSelect-${driverCount}`)
                     let option = document.createElement("option")

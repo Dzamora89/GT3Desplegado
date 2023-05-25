@@ -122,12 +122,12 @@ $('#updateSelect').change((() => {
             <input  id="urlInput" type="url" class="form-control" placeholder="Driver Website" aria-label="DriverWebsite" aria-describedby="Driver-Website" value="${jsonResult.driverWebsite}">
         </div>
         <div class="input-group mb-3 w-50">
-            <span class="input-group-text" id="driverImgUrl">Driver Image URL</span>
-            <input readonly id="driverImgUrl" type="url" class="form-control" placeholder="driverImgUrl" aria-label="DriverWebsite" aria-describedby="Driver-Website" value="${jsonResult.driverImgUrl}">
+            <span class="input-group-text" id="driverImgUrlLabel">Driver Image URL</span>
+            <input id="driverImgUrl" type="url" class="form-control" placeholder="driverImgUrl" aria-label="DriverWebsite" aria-describedby="Driver-Website" value="${jsonResult.driverImgUrl}">
         </div>
         <div class="input-group mb-3 w-50">
-            <span class="input-group-text" id="Twitter">Twitter @</span>
-            <input  id="twitterInput" type="text" class="form-control" placeholder="Twitter Handle" aria-label="Twitter" aria-describedby="Twitter" value="${jsonResult.driverTwitter}">
+            <span class="input-group-text" id="Twitter">Twitter </span>
+            <input id="twitterInput" type="text" class="form-control" placeholder="Twitter Handle" aria-label="Twitter" aria-describedby="Twitter" value="${jsonResult.driverTwitter}">
         </div>
         <div class="input-group mb-3 w-25">
             <span class="input-group-text" id="DriverStatus">Driver Status</span>
@@ -166,6 +166,8 @@ function updateDriver() {
     let status = $('#driverStatusInput').val()
     let initialElo = $('#initialEloInput').val()
     let birthday = $('#birthDayInput').val()
+    let driverImgUrl = $('#driverImgUrl').val()
+
 
     $.ajax({
         'url': '../../backend/api/driver/UpdateDriver.php',
@@ -177,9 +179,9 @@ function updateDriver() {
             'driverDateOfBirth' : birthday,
             'driverWebsite' : url,
             'driverTwitter' : twitter,
-            'driverLicenseLevel' : valor,
             'driverStatus' : status,
             'driverELO' : initialElo,
+            'driverImgUrl' : driverImgUrl
         },
         'type': 'get',
         'dataType': 'html',

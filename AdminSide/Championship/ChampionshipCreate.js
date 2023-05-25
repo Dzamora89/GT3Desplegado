@@ -77,7 +77,7 @@ function createChampionship(){
                 'championshipWebsite' : championshipWebsite,
                 'championshipFacebook' : championshipFacebook,
                 'championshipTwitter' : championshipTwitter,
-                'championshipYouTube' : championshipYouTube
+                'championshipYoutube' : championshipYouTube
             },
             'type': 'get',
             'dataType': 'html',

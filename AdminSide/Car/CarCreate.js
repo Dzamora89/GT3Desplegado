@@ -85,7 +85,7 @@ function createCar(){
     let carNumber = $('#carNumber').val()
     let carClass = $('#className').val()
 $.ajax({
-        'url': 'URL',
+        'url': '../../BackEnd/API/Car/CreateCar.php',
         'data': {
             'carManufacturer' : carManufacturer,
             'carTeamID' : carTeamID,

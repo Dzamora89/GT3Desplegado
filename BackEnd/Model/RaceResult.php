@@ -154,7 +154,7 @@ class RaceResult
                     join driver d on d.driverID = raceresult.raceresultDriverID
                     join race r on raceresult.raceresultRaceID = r.raceID
                   WHERE raceresultRaceID = :raceresultRaceID
-                  ORDER BY raceresultPosition';
+                  ORDER BY raceresultPosition asc ';
         //Prepare Statement
 
         $stmt = $this->conn->prepare($query);

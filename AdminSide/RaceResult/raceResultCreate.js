@@ -143,6 +143,7 @@ $(document).on('change','#raceSelect', (event) => {
             .done( (response) => {
                 response.forEach((e) => {
                     drivers.push(e)
+                    console.log(e)
                     $('#resultTable tbody').append(
                         `
                         <tr>
@@ -167,7 +168,7 @@ $(document).on('change','#raceSelect', (event) => {
                 for (let i = 0; i < response.length; i++) {
                     $(`.pilotos`).append(
                         `
-                            <option value="${response[i].championshipEntryDriverID}"> ${response[i].driverFirstName} ${response[i].driverLastName}</option>
+                            <option value="${response[i].championshipEntryDriverID}"> ${response[i].driverLastName} , ${response[i].driverFirstName} </option>
                         `
                     )
                 }
@@ -180,7 +181,7 @@ $(document).on('change','#raceSelect', (event) => {
 
 //Aqui vamos a hacerlo para que al seleccionar un piloto se rellene el numero del coche y la marca de forma automatica.
 $(document).on('change', '.pilotos', (event) => {
-    let selectedDriver = drivers.find((element) => element.championshipEntryDriverID === $(event.target).val())
+    let selectedDriver = drivers.find((element) => parseInt(element.championshipEntryDriverID) === parseInt(event.target.value))
     //Vuelves 1 atras para ir al TR y vas 1 TD adelante y ya el hijo es el input del numero
     $(event.target).parent().next().children().eq(0).val(selectedDriver.carNumber)
     $(event.target).parent().next().children().eq(1).val(selectedDriver.carID)
@@ -203,13 +204,14 @@ $(document).on('click', '#guardar', (event) => {
             }
         }
     }
+    console.log(eloChanges)
     eloChanges.forEach((value, index, array) => {
         $('.eloUpdated').eq(index).val(`${value}`)
     })
     for (let i = 0; i < drivers.length; i++) {
-        let eloTotal =  parseInt($('.driverELO').eq(i).val()) + parseInt($('.eloUpdated').eq(i).val())
+        let eloTotal =  parseInt($('.driverElo').eq(i).val()) + eloChanges[i]
         $.ajax({
-                'url': '../../backend/api/raceresult/createraceresult.php',
+                'url': '../../backEnd/API/RaceResult/CreateRaceResult.php',
                 'data': {
                     'raceresultCarID' : $('.carID').eq(i).val(),
                     'raceresultRaceID' : $('#raceSelect').val(),
@@ -288,7 +290,7 @@ function getSelect() {
     `)
 
     $.ajax({
-            'url': 'http://localhost/gt3prostats/backend/api/championship/getAllchampionship.php',
+            'url': '../../backend/api/championship/getAllchampionship.php',
             'type': 'get',
             'dataType': 'json',
             'beforeSend':  () => {

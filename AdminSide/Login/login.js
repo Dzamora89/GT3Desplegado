@@ -78,7 +78,6 @@ $(document).on('click','#login-btn', event => {
                 document.cookie = `username=${$('#username').val()}; expires=${expires}; path=/`;
                 // Redirecciona a la página "adminhome"
                 window.location.href = "../admin/adminHome.html";
-
             }else {
                 Swal.fire({
                     icon: 'error',

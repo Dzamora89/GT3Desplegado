@@ -139,7 +139,7 @@ function updateCar() {
 
 
     $.ajax({
-            'url': '../../backend/api/car/UpdateCar.php',
+            'url': '../../BackEnd/API/Car/UpdateCar.php',
             'data': {
                 'carID' : carID,
                 'carManufacturer' : carManufacturer,
@@ -148,7 +148,7 @@ function updateCar() {
                 'carClass' : carClass
 
             },
-            'type': 'post',
+            'type': 'get',
             'dataType': 'html',
             'beforeSend':  () => {
             }

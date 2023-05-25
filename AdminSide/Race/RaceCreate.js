@@ -89,12 +89,12 @@ function createRace(){
     let championshipID = $('#championshipSelect').val()
 
     $.ajax({
-            'url': 'URL',
+            'url': '../../BackEnd/API/Race/CreateRace.php',
             'data': {
-                'track' : track,
-                'dateOfRace' : dateOfRace,
-                'country' : country,
-                'championshipID' : championshipID
+                'raceTrack' : track,
+                'raceDateOfRace' : dateOfRace,
+                'raceCountry' : country,
+                'raceChampionshipID' : championshipID
             },
             'type': 'get',
             'dataType': 'html',
@@ -114,7 +114,7 @@ function createRace(){
                 document.getElementById('principal').appendChild(alert)
             })
             .fail( function (code, status) {
-                console.log('error', status)
+                console.log('error', status, code)
                 let alert = document.createElement("div")
                 alert.innerHTML =
                     `<div class="alert alert-danger alert-dismissible fade show  m-auto mt-3" role="alert">

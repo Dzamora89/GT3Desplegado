@@ -268,7 +268,7 @@ function getSelect() {
     `)
 
     $.ajax({
-        'url': 'http://localhost/gt3prostats/backend/api/championship/getAllchampionship.php',
+        'url': '../../backend/api/championship/getAllchampionship.php',
         'type': 'get',
         'dataType': 'json',
         'beforeSend':  () => {

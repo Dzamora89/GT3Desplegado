@@ -24,7 +24,7 @@ class Car
         //Create Query
         $query = 'SELECT * 
                   FROM car join team on car.carTeamID = team.TeamID 
-                  ORDER BY carID ASC';
+                  ORDER BY carNumber';
 
         // Prepared Statement
 

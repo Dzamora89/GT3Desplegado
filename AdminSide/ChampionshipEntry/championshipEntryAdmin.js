@@ -62,7 +62,7 @@ var requestOptions = {
     method: 'GET',
     redirect: 'follow'
 };
-fetch("../../backend/api/championship/getAllchampionship.php", requestOptions)
+fetch("../../BackEnd/API/Championship/GetAllChampionship.php", requestOptions)
     .then(response => response.json())
     .then(data => data.forEach(dato => {
         let table = document.getElementById('ChampionshipTable')

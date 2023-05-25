@@ -198,17 +198,18 @@ class ChampionshipEntry
 
 
     public function updateTheChampionship($pointsScored){
-        $query = 'update championshipEntry
-                    set championshipEntryTotalPoints = championshipEntryTotalPoints + :pointsScored
-                    where championshipEntryDriverID = :driverID and championshipEntryChampionshipID = :championshipID';
+        $query = 'UPDATE championshipentry
+            SET championshipEntryTotalPoints = championshipEntryTotalPoints + :pointsScored
+            where championshipEntryDriverID = :driverID and championshipEntryChampionshipID = :championshipID';
 
         $stmt = $this->conn->prepare($query);
 
         //Bind ID
-        $stmt->bindParam(':driverID', $this->championshipEntryDriverID);
-        $stmt->bindParam(':championshipID', $this->championshipEntryChampionshipID);
-        $stmt->bindParam('pointsScored', $pointsScored, PDO::PARAM_INT);
+        $stmt->bindValue(':driverID', $this->championshipEntryDriverID);
+        $stmt->bindValue(':championshipID', $this->championshipEntryChampionshipID);
+        $stmt->bindValue(':pointsScored', intval($pointsScored),PDO::PARAM_INT);
         // Execute Query
+
         $stmt->execute();
         return $stmt;
     }

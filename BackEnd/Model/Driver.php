@@ -30,7 +30,8 @@ class Driver
     public function getAllDriver()
     {
         //Create Query
-        $query = 'SELECT * 
+        $query = 'SELECT distinct driverID, driverFirstName, driverLastName, driverCountry, driverWebsite, driverTwitter, driverStatus,
+                        driverELO, carManufacturer
                   FROM driver
                   left join championshipentry c on driver.driverID = c.championshipEntryDriverID
                   left join car c2 on c2.carID = c.championshipEntryCarID
@@ -249,13 +250,13 @@ class Driver
     }
 
 
-    public function updateElo($newELO){
+    public function updateElo(){
         $query = 'Update driver 
                     set driverELO = :newELO
                     where driverID = :driverID';
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':newELO', intval($newELO), PDO::PARAM_INT);
-        $stmt->bindParam(':driverID', $this->driverID);
+        $stmt->bindValue(':newELO', intval($this->driverELO), PDO::PARAM_INT);
+        $stmt->bindValue(':driverID', $this->driverID);
         $stmt->execute();
         return $stmt;
     }

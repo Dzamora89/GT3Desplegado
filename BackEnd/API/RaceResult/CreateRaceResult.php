@@ -35,19 +35,23 @@ $raceResult->raceresultPosition = $_GET['raceresultPosition'];
 
 
 $driver->driverID = $_GET['raceResultDriverID'];
-
+$driver->driverELO = $_GET['driverELO'];
 $championshipEntry->championshipEntryChampionshipID = $_GET['championshipID'];
 $championshipEntry->championshipEntryDriverID = $_GET['raceResultDriverID'];
 
 
 
 
-
 //Create the race
 if ($raceResult->createRaceResult()) {
-    echo json_encode(array('message' => 'Race Result Created'));
-    $championshipEntry->updateTheChampionship($_GET['raceresultPointsScored']);
-    $driver->updateElo($_GET['driverELO']);
+    try {
+        echo json_encode(array('message' => 'Race Result Created'));
+        $championshipEntry->updateTheChampionship($_GET['raceresultPointsScored']);
+        $driver->updateElo();
+    }catch (Error){
+        echo Error::getMessage();
+    }
+
 } else {
     echo json_encode(
         array('message' => 'Race Result Not created')
